@@ -5,7 +5,6 @@
   "main": "index.js",
   "dependencies": {
     "express": "^4.13.4",
-    "superagent": "^1",
     "body-parser": "^1"
   },
   "scripts": {
