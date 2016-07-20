@@ -1,0 +1,20 @@
+{
+  "name": "zhanglemeng",
+  "version": "1.0.0",
+  "description": "乐萌网",
+  "main": "index.js",
+  "dependencies": {
+    "express": "^4.13.4",
+    "superagent": "^1",
+    "body-parser": "^1"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/zhangqiangoffice/zhanglemeng.git"
+  },
+  "author": "张强",
+  "license": "ISC"
+}
