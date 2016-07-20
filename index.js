@@ -6,21 +6,22 @@ app.set('port', 80);
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+app.use(express.static('public'));
 
 app.get('/', function(req, res) {
-  res.send('大家好，我叫张乐萌！');
+  res.send('<p>大家好，我叫张乐萌！</p><img style="width:200px" src="/img/1.jpg">');
 });
 
 
 app.use(function(req, res) {
   res.status(404);
-  res.render('404');
+  res.send('404');
 });
 
 app.use(function(err, req, res, next){
   console.error(err.stack);
   res.status(500);
-  res.render('500');
+  res.send('500');
 });
 
 app.listen(app.get('port'), function(){
