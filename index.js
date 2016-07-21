@@ -1,6 +1,7 @@
 var express = require('express');
 var bodyParser = require('body-parser');
 var app = express();
+var morgan = require('morgan');
 
 app.set('port', 80);
 app.set('views', './views');
@@ -8,7 +9,8 @@ app.set('view engine', 'ejs');
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
-app.use('/static', express.static('public'));
+app.use('/static', express.static('public')); //指定静态文件夹
+app.use(morgan('combined')); //输出日志
 
 app.get('/', function(req, res) {
     res.render('album');
