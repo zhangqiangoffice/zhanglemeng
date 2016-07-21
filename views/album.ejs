@@ -3,17 +3,29 @@
 <head>
     <title>张乐萌相册</title>
     <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/css/album.css" />
+    <link rel="stylesheet" href="/static/css/album.css" />
 </head>
 <body>
     <div class="album">
-        <div class="sheet left_sheet">
-            <img src="/img/1.jpg">
+        <div class="sheet left_sheet" id="left_sheet" data-i="1">
+            <div class="clip">
+                <img src="/static/img/1.jpg">
+                <div class="date">
+                    <label>2016年7月2日</label>
+                </div>
+            </div>
+            
         </div>
-        <div class="sheet right_sheet">
-            <img src="/img/2.jpg">
+        <div class="sheet right_sheet" id="right_sheet" data-i="2">
+            <div class="clip">
+                <img src="/static/img/2.jpg">
+                <div class="date">
+                    <label>2016年6月19日</label>
+                </div>
+            </div>
         </div>
-        
     </div>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/album.js"></script>
 </body>
 </html>
