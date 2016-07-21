@@ -1,0 +1,47 @@
+/**
+ * 文件：乐萌网相册页
+ * 作者：无名大强
+ * 版本：v0.1
+ * 版权：张强
+ * 日期：2016-7-21
+**/
+
+@import "zlib.v2.less";
+@import "initial.less";
+
+body {
+    background-color: #C8AE7B;
+}
+
+.album {
+    .size(1000px, 750px);
+    margin: 100px auto;
+    background-color: #D589AF;
+    .clearfix;
+    padding-top: 30px;
+}
+
+.sheet {
+    .size(440px, 650px);
+    background-color: #F8F1E1;
+    .f-l;
+    .t-c;
+    img {
+        margin: 80px 0;
+        width: 300px;
+    }
+}
+
+.left_sheet {
+    margin: 0px 20px 0 50px;
+    img {
+        transform: rotate(-8deg);
+    }
+}
+
+.right_sheet {
+    img {
+        transform: rotate(5deg);
+    }
+}
+
