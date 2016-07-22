@@ -2,25 +2,25 @@
 <html>
 <head>
     <title>张乐萌相册</title>
-    <link rel="shortcut icon" href="/img/favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
     <link rel="stylesheet" href="/static/css/album.css" />
 </head>
 <body>
     <div class="album">
-        <div class="sheet left_sheet" id="left_sheet" data-i="1">
+        <div class="sheet left_sheet" id="left_sheet" data-i="0">
             <div class="clip">
-                <img src="/static/img/1.jpg">
+                <img src="<%= photos[0].path %>">
                 <div class="date">
-                    <label>2016年7月2日</label>
+                    <label><%= photos[0].date %></label>
                 </div>
             </div>
             
         </div>
-        <div class="sheet right_sheet" id="right_sheet" data-i="2">
+        <div class="sheet right_sheet" id="right_sheet" data-i="1">
             <div class="clip">
-                <img src="/static/img/2.jpg">
+                <img src="<%= photos[1].path %>">
                 <div class="date">
-                    <label>2016年6月19日</label>
+                    <label><%= photos[1].date %></label>
                 </div>
             </div>
         </div>

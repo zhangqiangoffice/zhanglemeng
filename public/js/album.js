@@ -8,17 +8,22 @@
 
 $(function(){
 
+    var photos;
+
+    //获取全部相片的地址信息
+    findAllPhotos();
+
     //点击右侧页
     $('#right_sheet').click(function(){
-        var id = $(this).data('i');
-        getTwoPhotos(id, 1);
+        var index = $(this).data('i');
+        getTwoPhotos(index, 1);
         
     });
 
     //点击左侧页
     $('#left_sheet').click(function(){
-        var id = $(this).data('i');
-        getTwoPhotos(id, 0);
+        var index = $(this).data('i');
+        getTwoPhotos(index, 0);
         
     });
 
@@ -28,29 +33,55 @@ $(function(){
      * 输入：
      * 输出：
     **/
-    function getTwoPhotos(id, to) {
+    function getTwoPhotos(index, to) {
         $('.clip').fadeOut();
-        console.log(to);
+        var len = photos.length;
+        var i1, i2;
+        if (to.toString() === '1') {
+            i1 = (index - 0 + 1) % len;
+            i2 = (index - 0 + 2) % len;
+        } else {
+            i1 = (index - 2 + len) % len;
+            i2 = (index - 1 + len) % len;
+        }
+        $('#left_sheet').find('img').attr('src',photos[i1].path);
+        $('#left_sheet').find('label').text(dateFormat(photos[i1].date));
+        $('#left_sheet').data('i', i1);
+        $('#right_sheet').find('img').attr('src',photos[i2].path);
+        $('#right_sheet').find('label').text(dateFormat(photos[i2].date));
+        $('#right_sheet').data('i', i2);
+        $('.clip').fadeIn();
+    }
+
+    /**
+     * 函数：获取全部照片信息
+     * 输入：
+     * 输出：
+    **/
+    function findAllPhotos() {
         $.ajax({
             type: "post",
-            url: "/api/get_two_photos",
-            data : {id: id, to: to},
+            url: "/ajax/find_all_photos",
             dataType: "json",
             success: function(msg) {
                 // console.log(msg);
-                if (msg.result.toString() === "1") {
-                    var list = msg.list;
-                    $('#left_sheet').find('img').attr('src',list[0].path);
-                    $('#left_sheet').find('label').text(list[0].date);
-                    $('#left_sheet').data('i', list[0].id);
-                    $('#right_sheet').find('img').attr('src',list[1].path);
-                    $('#right_sheet').find('label').text(list[1].date);
-                    $('#right_sheet').data('i', list[1].id);
+                if (msg.result.toString() === '1') {
+                    photos = msg.list;
                 } else {
                     alert(msg.message);
                 }
-                $('.clip').fadeIn();
             }
         });
+    }
+
+    /**
+     * 函数：日期格式化
+     * 输入：
+     * 输出：
+    **/
+    function dateFormat(date) {
+        var arr = date.split('-');
+        var str = arr[0] + '年' + Number(arr[1]) + '月' + Number(arr[2]) + '日';
+        return str;
     }
 });
