@@ -4,12 +4,14 @@
   "description": "乐萌网",
   "main": "index.js",
   "dependencies": {
-    "assert": "^1.4.1",
     "body-parser": "^1",
     "ejs": "^2.4.2",
     "express": "^4.13.4",
+    "formidable": "^1.0.17",
+    "fs": "0.0.2",
     "mongodb": "^2.2.4",
-    "morgan": "^1.7.0"
+    "morgan": "^1.7.0",
+    "serve-favicon": "^2.3.0"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
