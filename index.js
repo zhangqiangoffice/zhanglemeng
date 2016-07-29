@@ -7,11 +7,21 @@ var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/zhanglemeng';
 var ablum = require('./routes/ablum');
 var ajax = require('./routes/ajax');
-var msapi = require('./routes/msapi');
+var api = require('./routes/api');
+var excel = require('./routes/excel');
 
 app.set('port', 80);
 app.set('views', './views');
 app.set('view engine', 'ejs');
+
+app.all('*', function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "X-Requested-With");
+    res.header("Access-Control-Allow-Methods","PUT,POST,GET,DELETE,OPTIONS");
+    res.header("X-Powered-By",' 3.2.1');
+    res.header("Content-Type", "application/json;charset=utf-8");
+    next();
+});
 
 app.use(bodyParser.json()); // for parsing application/json
 app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
@@ -21,6 +31,9 @@ app.use(morgan('log: :remote-addr [:date[clf]] :status (:response-time ms) :meth
 
 app.use('/ablum', ablum);
 app.use('/ajax', ajax);
+app.use('/api', api);
+app.use('/excel', excel);
+
 
 app.get('/', function(req, res) {
     res.redirect('/ablum');
