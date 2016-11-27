@@ -2,8 +2,6 @@
 <html>
 <head>
     <title>新增病例</title>
-    <link rel="shortcut icon" href="/static/img/favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="/static/css/album_add.css" />
 </head>
 <body>
     <div >
@@ -12,26 +10,47 @@
             <table>
                 <tbody>
                     <tr>
-                        <td>选择图片：</td>
-                        <td><input type="file" name="photo"></td>
+                        <td colspan="2">基本信息</td>
                     </tr>
                     <tr>
-                        <td>拍摄日期：</td>
-                        <td><input type="text" name="date" placeholder="例：2016-07-09"></td>
+                        <td>性别：</td>
+                        <td>
+                            <input type="radio" name="gender" value="0">男</input>
+                            <input type="radio" name="gender" value="1">女</input>
+                        </td>
                     </tr>
                     <tr>
-                        <td>提交口令：</td>
-                        <td><input type="password" name="psd"></td>
+                        <td>出生年月：</td>
+                        <td><input type="text" name="birth"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">疾病信息</td>
+                    </tr>
+                    <tr>
+                        <td>日期：</td>
+                        <td>
+                            <input type="text"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>主诉：</td>
+                        <td>
+                            <input type="text"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>体检：</td>
+                        <td>
+                            <input type="text"></input>
+                        </td>
                     </tr>
                     <tr>
                         <td></td>
-                        <td><button type="submit">提交照片</button></td>
+                        <td><button type="submit">提交</button></td>
                     </tr>
                 </tbody>
             </table>
         </form>
     </div>
-    <script type="text/javascript" src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script type="text/javascript" src="/static/js/album_add.js"></script>
 </body>
 </html>
