@@ -49,7 +49,7 @@ var dateFormat = function (date) {
     var arr = date.split('-');
     var str = arr[0] + '年' + Number(arr[1]) + '月' + Number(arr[2]) + '日';
     return str;
-}
+};
 
 /* GET ablum listing. */
 router.get('/', function(req, res, next) {
@@ -58,7 +58,7 @@ router.get('/', function(req, res, next) {
             result[0].date = dateFormat(result[0].date);
             result[1].date = dateFormat(result[1].date);
 
-            res.render('album',{photos:result});            
+            res.render('album', {photos:result} );            
             db.close();
         });
     });
