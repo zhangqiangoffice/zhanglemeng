@@ -7,13 +7,14 @@ var MongoClient = require('mongodb').MongoClient;
 var url = 'mongodb://localhost:27017/zhanglemeng';
 var ablum = require('./routes/ablum');
 var ajax = require('./routes/ajax');
+var report = require('./routes/report');
 
-app.set('port', 80);
+app.set('port', 3010);
 app.set('views', './views');
 app.set('view engine', 'ejs');
 
-app.use(bodyParser.json()); // for parsing application/json
-app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
+// app.use(bodyParser.json()); // for parsing application/json
+// app.use(bodyParser.urlencoded({ extended: true })); // for parsing application/x-www-form-urlencoded
 app.use('/static', express.static('public')); //指定静态文件夹
 app.use(favicon(__dirname + '/public/img/favicon.ico'));
 app.use(morgan('log: :remote-addr [:date[clf]] :status (:response-time ms) :method :url')); //输出日志
@@ -22,7 +23,7 @@ app.use('/ablum', ablum);
 app.use('/ajax', ajax);
 
 app.get('/', function(req, res) {
-    res.redirect('/ablum');
+    res.redirect('/report');
 });
 
 app.use(function(req, res) {
@@ -37,6 +38,6 @@ app.use(function(err, req, res, next){
 });
 
 app.listen(app.get('port'), function(){
-    console.log('Express started on http://121.41.66.82:' +
+    console.log('Express started on http://localhost:' +
     app.get('port') + ';press Ctrl-c to terminate.');
 });
