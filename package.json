@@ -7,10 +7,12 @@
     "body-parser": "^1",
     "ejs": "^2.4.2",
     "express": "^4.13.4",
+    "express-session": "^1.14.2",
     "formidable": "^1.0.17",
     "fs": "0.0.2",
     "mongodb": "^2.2.4",
     "morgan": "^1.7.0",
+    "multer": "^1.2.0",
     "node-xlsx": "^0.7.1",
     "serve-favicon": "^2.3.0"
   },

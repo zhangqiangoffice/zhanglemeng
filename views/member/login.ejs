@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>登录</title>
+</head>
+<body>
+    <div >
+        <div>登录</div>
+        <form method="post" enctype="multipart/form-data" name="form">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>账号：</td>
+                        <td>
+                            <input type="text" id="username" placeholder="请输入手机、邮箱或身份证"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>密码：</td>
+                        <td><input type="password" id="password"></td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><button type="button" id="login">登录</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+    <script src="http://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#login').click(function(){
+                var datas = {
+                    username: $('#username').val(),
+                    password: $('#password').val()
+                }
+                $.ajax({
+                    url: "",
+                    data: datas,
+                    type: "post",
+                    dataType: "json",
+                    success:function(msg){
+                        //console.log(msg);
+                        if (msg.result === 1) {
+                            window.location.href = './index';
+                        } else {
+                            alert(msg.message);
+                        }
+                        
+                    }
+                });
+            });
+
+        });
+    </script>
+</body>
+</html>
