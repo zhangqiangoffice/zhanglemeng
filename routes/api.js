@@ -203,5 +203,24 @@ router.post('/xunchedai/api005', function(req, res) {
     res.json({result: 1, message: '成功', total:3, list: list});
 });
 
+//行事历
+router.post('/xingshili/api001', function(req, res) {
+    var list = [
+        {staffid: '2' , time: '2016-08-22 16:37:58', content: '第一次汇报工作'},
+        {staffid: '5' , time: '2016-08-21 10:37:58', content: '第二次次汇报工作'},
+        {staffid: '6' , time: '2016-08-22 16:37:58', content: '第三次汇报工作'}
+    ];
+    res.json({result: 1, message: '成功', list: list});
+});
+
+router.post('/xingshili/api002', function(req, res) {
+    var list = [
+        {staffid: '2' , time: '2016-08-22 16:37:58', content: '你的工作报告呢！'},
+        {staffid: '5' , time: '2016-08-21 10:37:58', content: '你的工作报告呢！'},
+        {staffid: '6' , time: '2016-08-22 16:37:58', content: '你的工作报告呢！'}
+    ];
+    res.json({result: 1, message: '成功', list: list});
+});
+
 
 module.exports = router;
