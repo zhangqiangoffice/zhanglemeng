@@ -6,7 +6,45 @@
 <body>
     <div >
         <div>用户首页</div>
-        <div><span>您好：</span><%= user.username %></div>
+        <div><span>您好：</span>用户</div>
+        <div>
+        	<button type="button" id="insert">插入数据</button>
+        	<button type="button" id="logout">登出</button>
+        </div>
     </div>
+    <script src="http://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#logout').click(function(){
+                $.ajax({
+                    url: "logout",
+                    type: "post",
+                    dataType: "json",
+                    success:function(msg){
+                        //console.log(msg);
+                        if (msg.result === 1) {
+                            window.location.href = './login';
+                        } else {
+                            alert(msg.message);
+                        }
+                        
+                    }
+                });
+            });
+
+            $('#insert').click(function() {
+            	$.ajax({
+            		url: 'insert',
+            		type: 'post',
+            		dataType: 'json',
+            		success:function(msg){
+                        //console.log(msg);
+                        alert(msg.message);
+                    }
+            	})
+            })
+
+        });
+    </script>
 </body>
 </html>
