@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>新增病例</title>
+</head>
+<body>
+    <div >
+        <div><%= message%> </div>
+        <form method="post" enctype="multipart/form-data">
+            <table>
+                <tbody>
+                    <tr>
+                        <td colspan="2">基本信息</td>
+                    </tr>
+                    <tr>
+                        <td>性别：</td>
+                        <td>
+                            <input type="radio" name="gender" value="0">男</input>
+                            <input type="radio" name="gender" value="1">女</input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>出生年月：</td>
+                        <td><input type="text" name="birth"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="2">疾病信息</td>
+                    </tr>
+                    <tr>
+                        <td>日期：</td>
+                        <td>
+                            <input type="text"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>主诉：</td>
+                        <td>
+                            <input type="text"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>体检：</td>
+                        <td>
+                            <input type="text"></input>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td></td>
+                        <td><button type="submit">提交</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
