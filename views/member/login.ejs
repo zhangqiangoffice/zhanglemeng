@@ -21,7 +21,10 @@
                     </tr>
                     <tr>
                         <td></td>
-                        <td><button type="button" id="login">登录</button></td>
+                        <td>
+                            <button type="button" id="login">登录</button>
+                            <button type="button" id="register">注册</button>
+                        </td>
                     </tr>
                 </tbody>
             </table>
@@ -50,6 +53,10 @@
                         
                     }
                 });
+            });
+
+            $('#register').click(function(){
+                window.location.href = './register'
             });
 
         });

@@ -1,3 +1,4 @@
+//zhangq 123456
 var express = require('express');
 var bodyParser = require('body-parser');
 
@@ -5,7 +6,7 @@ var favicon = require('serve-favicon');
 var morgan = require('morgan');
 var MongoClient = require('mongodb').MongoClient;
 var session = require('express-session');
-var url = 'mongodb://localhost:27017/zhanglemeng';
+var url = 'mongodb //localhost:27017/zhanglemeng -u zhangq -p 123456';
 
 // var ablum = require('./routes/ablum');
 // var ajax = require('./routes/ajax');
