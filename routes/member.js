@@ -3,43 +3,40 @@ var router = express.Router();
 var MongoClient = require('mongodb').MongoClient;
 var dburl = 'mongodb://zhangq:123456@ds111748.mlab.com:11748/zhanglemeng';
 
-var insertDB = function(db, callback) {
-    var user={
-        username:'admin',
-        password:'admin'
-    }
-    var collection = db.collection('users');
-    collection.insert(user, function(err, result){
-        callback(result.result);
-    });
-};
-
 //用户登录
 router.get('/login', function(req, res) {
     res.render('member/login');
 });
 
-//提交密码
+//提交密码，验证登录
 router.post('/login', function(req, res) {
     var user={
-        username:'admin',
-        password:'admin'
+        username: req.body.username,
+        password: req.body.password
     }
-    if(req.body.username == user.username && req.body.password == user.password) {
-        req.session.user = user;
-        res.json({result: 1, message: '登录成功'});
-    }else{
-        req.session.error = "用户名或密码不正确";
-        res.json({result: 0, message: '用户名或密码不正确'});
-    }
+    MongoClient.connect(dburl, function(err, db) {
+        var collection = db.collection('users');
+        collection.find(user).toArray(function(err, docs) {
+            if (docs.length === 1) {
+                req.session.user = user;
+                console.log(user.username + "登录成功");
+                res.json({result: 1, message: '登录成功'});
+            } else {
+                req.session.error = "用户名或密码不正确";
+                res.json({result: 0, message: '用户名或密码不正确'});
+            }
+            db.close();
+        })
+    });
 });
 
 //用户首页
 router.get('/index', function(req, res) {
     if (!req.session.user) {
         res.redirect('./login');
+    } else {
+        res.render('member/index', {username: req.session.user.username});
     }
-    res.render('member/index');
 });
 
 //登出接口
@@ -57,24 +54,59 @@ router.get('/register', function(req, res) {
 router.post('/register', function(req, res) {
     MongoClient.connect(dburl, function(err, db) {
         var collection = db.collection('users');
-        collection.insert(user, function(err, result){
-            console.log('插入一个新的用户到users');
-            res.json({result: 1, message: '新用户注册成功'});
-        });
+        var username = req.body.username;
+        var password = req.body.password;
+        collection.find({username: username}).toArray(function(err, docs) {
+            if (docs.length) {
+                res.json({result: 0, message: '用户名已存在'});
+                db.close();
+            } else {
+                var user = {
+                    username: username,
+                    password: password
+                }
+                collection.insert(user, function(err, result){
+                    console.log('插入一个新的用户到users');
+                    req.session.user = user;
+                    res.json({result: 1, message: '新用户注册成功'});
+                    db.close();
+                });
+            }
+        })
     });
 });
 
-
-
-//操作数据库
-router.post('/insert', function(req, res) {
-    MongoClient.connect(dburl, function(err, db) {
-        insertDB(db, function(result) {
-            res.json({result: 1, message: '成功'});          
-            db.close();
-        });
-    });
-    
+//修改密码页
+router.get('/set', function(req, res) {
+    if (!req.session.user) {
+        res.redirect('./login');
+    } else {
+        
+        res.render('member/set');
+    }
 });
+
+//修改新密码
+router.post('/set', function(req, res) {
+    if (!req.session.user) {
+        res.redirect('./login');
+    } else {
+        MongoClient.connect(dburl, function(err, db) {
+            var collection = db.collection('users');
+            var username = req.session.user.username;
+            var password = req.body.old;
+            collection.updateOne({username: username , password: password},
+                {$set: {password: req.body.new}}, function(err, result) {
+                if (result.result.ok === 1 && result.result.n === 1) {
+                    res.json({result: 1, message: '密码修改成功'});
+                } else {
+                    res.json({result: 0, message: '密码修改失败'});
+                }
+                db.close();
+            });
+        });
+    }
+});
+
 
 module.exports = router;
