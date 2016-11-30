@@ -16,14 +16,9 @@ var url = 'mongodb //localhost:27017/zhanglemeng -u zhangq -p 123456';
 
 
 //路由控制
-
-//诊断报告模块
-var report = require('./routes/report');
-
-//数据记录模块
-
-//用户模块
-var member = require('./routes/member');
+var member = require('./routes/member');        //用户模块
+var report = require('./routes/report');        //诊断报告模块
+var record = require('./routes/record');        //数据记录模块
 
 morgan.token('date',function(){return new Date().toLocaleString();});
 
@@ -63,6 +58,7 @@ app.use(morgan('log: :remote-addr [:date[iso]] :status (:response-time ms) :meth
 // app.use('/excel', excel);
 app.use('/report', report);
 app.use('/member', member);
+app.use('/record', record);
 
 app.get('/', function(req, res) {
     res.redirect('/report');
