@@ -46,9 +46,9 @@ router.post('/height', function(req, res) {
     } else {
         MongoClient.connect(dburl, function(err, db) {
             var collection = db.collection('users');
-            var username = req.session.user.username;
+            var value = req.body.height;
             var password = req.body.old;
-            collection.updateOne({username: username , password: password},
+            collection.updateOne({username: username},
                 {$set: {password: req.body.new}}, function(err, result) {
                 if (result.result.ok === 1 && result.result.n === 1) {
                     res.json({result: 1, message: '密码修改成功'});
