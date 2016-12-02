@@ -4,18 +4,38 @@
     <title>个人体重记录</title>
 </head>
 <body>
-     <div >
+    <div >
         <div>个人体重记录</div>
-        <p>添加新记录</p>
-        <input type="text" id="weight" />
+        <p>添加新记录 <a href="./weight_history">历史数据</a></p>
+        <table>
+            <tbody>
+                <tr>
+                    <td>体重</td>
+                    <td><input type="text" id="weight" /></td>
+                </tr>
+                <tr>
+                    <td>时间</td>
+                    <td><input type="text" id="date" /></td>
+                    <td><button type="button" id="now">使用当前时间</button></td>
+                </tr>
+            </tbody>
+        </table>
+
         <button type="button" id="submit">提交</button>
+
     </div>
     <script src="http://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/public.js"></script>
     <script type="text/javascript">
         $(function(){
+            $('#date').val(nowString());
+            $('#now').click(function() {
+                $('#date').val(nowString());
+            });
             $('#submit').click(function(){
                 var datas = {
                     weight: $('#weight').val(),
+                    date: $('#date').val(),
                 }
                 $(this).text('数据保存中...').attr("disabled", "disabled");
                 $.ajax({
