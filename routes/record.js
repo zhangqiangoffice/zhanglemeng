@@ -12,7 +12,7 @@ router.get('/index', function(req, res) {
     }
 });
 
-//个人身高记录
+//新增个人身高记录
 router.get('/height', function(req, res) {
     if (!req.session.user) {
         res.redirect('../member/login');
@@ -21,7 +21,7 @@ router.get('/height', function(req, res) {
     }
 });
 
-//个人体重记录
+//新增个人体重记录
 router.get('/weight', function(req, res) {
     if (!req.session.user) {
         res.redirect('../member/login');
@@ -30,12 +30,39 @@ router.get('/weight', function(req, res) {
     }
 });
 
-//个人血压记录
+//新增个人血压记录
 router.get('/blood_press', function(req, res) {
     if (!req.session.user) {
         res.redirect('../member/login');
     } else {
         res.render('record/blood_press');
+    }
+});
+
+//个人身高历史记录
+router.get('/height_history', function(req, res) {
+    if (!req.session.user) {
+        res.redirect('../member/login');
+    } else {
+        res.render('record/height_history');
+    }
+});
+
+//个人体重历史记录
+router.get('/weight_history', function(req, res) {
+    if (!req.session.user) {
+        res.redirect('../member/login');
+    } else {
+        res.render('record/weight_history');
+    }
+});
+
+//个人血压历史记录
+router.get('/blood_press_history', function(req, res) {
+    if (!req.session.user) {
+        res.redirect('../member/login');
+    } else {
+        res.render('record/blood_press_history');
     }
 });
 
@@ -45,16 +72,58 @@ router.post('/height', function(req, res) {
         res.redirect('./login');
     } else {
         MongoClient.connect(dburl, function(err, db) {
-            var collection = db.collection('users');
-            var value = req.body.height;
-            var password = req.body.old;
-            collection.updateOne({username: username},
-                {$set: {password: req.body.new}}, function(err, result) {
-                if (result.result.ok === 1 && result.result.n === 1) {
-                    res.json({result: 1, message: '密码修改成功'});
-                } else {
-                    res.json({result: 0, message: '密码修改失败'});
-                }
+            var collection = db.collection('heights');
+            var height = {
+                user_id: req.session.user._id,
+                value: req.body.height,
+                date: new Date(),
+            }
+            collection.insert(height, function(err, result){
+                console.log('插入一个新的身高记录到heights');
+                res.json({result: 1, message: '数据保存成功'});
+                db.close();
+            });
+        });
+    }
+});
+
+//提交体重记录
+router.post('/weight', function(req, res) {
+    if (!req.session.user) {
+        res.redirect('./login');
+    } else {
+        MongoClient.connect(dburl, function(err, db) {
+            var collection = db.collection('weights');
+            var weight = {
+                user_id: req.session.user._id,
+                value: req.body.weight,
+                date: new Date(),
+            }
+            collection.insert(weight, function(err, result){
+                console.log('插入一个新的身高记录到weights');
+                res.json({result: 1, message: '数据保存成功'});
+                db.close();
+            });
+        });
+    }
+});
+
+//提交血压记录
+router.post('/blood_press', function(req, res) {
+    if (!req.session.user) {
+        res.redirect('./login');
+    } else {
+        MongoClient.connect(dburl, function(err, db) {
+            var collection = db.collection('blood_press');
+            var blood_press = {
+                user_id: req.session.user._id,
+                hi: req.body.hi,
+                low: req.body.low,
+                date: new Date(),
+            }
+            collection.insert(blood_press, function(err, result){
+                console.log('插入一个新的血压记录到blood_press');
+                res.json({result: 1, message: '数据保存成功'});
                 db.close();
             });
         });

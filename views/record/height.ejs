@@ -7,14 +7,35 @@
     <div >
         <div>个人身高记录</div>
         <p>添加新记录</p>
-        <input type="text" />
-        <button type="button">提交</button>
-        <p>历史记录</p>
-        <ul>
-            <li><span>2016-11-30 </span> <span>165</span>cm</li>
-            <li><span>2015-11-30 </span> <span>155</span>cm</li>
-            <li><span>2014-11-30 </span> <span>145</span>cm</li>
-        </ul>
+        <input type="text" id="height" />
+        <button type="button" id="submit">提交</button>
     </div>
+    <script src="http://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#submit').click(function(){
+                var datas = {
+                    height: $('#height').val(),
+                }
+                $(this).text('数据保存中...').attr("disabled", "disabled");
+                $.ajax({
+                    url: "",
+                    data: datas,
+                    type: "post",
+                    dataType: "json",
+                    success:function(msg){
+                        //console.log(msg);
+                        $('#submit').attr("disabled", false);
+                        if (msg.result === 1) {
+                            window.location.href = './height_history';
+                        } else {
+                            alert(msg.message);
+                        }
+                        
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

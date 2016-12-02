@@ -1,25 +1,25 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>个人血压记录</title>
+    <title>个人身高记录</title>
 </head>
 <body>
     <div >
-        <div>个人血压记录</div>
-        <p>添加新记录</p>
-        <label>低压<input type="text" id="low" /></label>
-        <label>高压<input type="text" id='hi'/></label>
-        <button type="button" id="submit">提交</button>
+        <div>个人身高记录</div>
+        <p>历史记录</p>
+        <ul>
+            <li><span>2016-11-30 </span> <span>165</span>cm</li>
+            <li><span>2015-11-30 </span> <span>155</span>cm</li>
+            <li><span>2014-11-30 </span> <span>145</span>cm</li>
+        </ul>
     </div>
     <script src="http://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
     <script type="text/javascript">
         $(function(){
             $('#submit').click(function(){
                 var datas = {
-                    low: $('#low').val(),
-                    hi: $('#hi').val(),
+                    height: $('#height').val(),
                 }
-                $(this).text('数据保存中...').attr("disabled", "disabled");
                 $.ajax({
                     url: "",
                     data: datas,
@@ -27,9 +27,8 @@
                     dataType: "json",
                     success:function(msg){
                         //console.log(msg);
-                        $('#submit').attr("disabled", false);
                         if (msg.result === 1) {
-                            window.location.href = './blood_press_history';
+                            window.location.href = './height_history';
                         } else {
                             alert(msg.message);
                         }
@@ -37,6 +36,11 @@
                     }
                 });
             });
+
+            $('#register').click(function(){
+                window.location.href = './register'
+            });
+
         });
     </script>
 </body>

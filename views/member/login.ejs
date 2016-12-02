@@ -38,6 +38,7 @@
                     username: $('#username').val(),
                     password: $('#password').val()
                 }
+                $(this).text('登录中...').attr("disabled", "disabled");
                 $.ajax({
                     url: "",
                     data: datas,
@@ -45,6 +46,7 @@
                     dataType: "json",
                     success:function(msg){
                         //console.log(msg);
+                        $('#login').attr("disabled", false);
                         if (msg.result === 1) {
                             window.location.href = './index';
                         } else {

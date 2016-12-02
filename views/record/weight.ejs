@@ -4,17 +4,38 @@
     <title>个人体重记录</title>
 </head>
 <body>
-    <div >
+     <div >
         <div>个人体重记录</div>
         <p>添加新记录</p>
-        <input type="text" />
-        <button type="button">提交</button>
-        <p>历史记录</p>
-        <ul>
-            <li><span>2016-11-30 </span> <span>55</span>kg</li>
-            <li><span>2015-11-30 </span> <span>55</span>kg</li>
-            <li><span>2014-11-30 </span> <span>45</span>kg</li>
-        </ul>
+        <input type="text" id="weight" />
+        <button type="button" id="submit">提交</button>
     </div>
+    <script src="http://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#submit').click(function(){
+                var datas = {
+                    weight: $('#weight').val(),
+                }
+                $(this).text('数据保存中...').attr("disabled", "disabled");
+                $.ajax({
+                    url: "",
+                    data: datas,
+                    type: "post",
+                    dataType: "json",
+                    success:function(msg){
+                        //console.log(msg);
+                        $('#submit').attr("disabled", false);
+                        if (msg.result === 1) {
+                            window.location.href = './weight_history';
+                        } else {
+                            alert(msg.message);
+                        }
+                        
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

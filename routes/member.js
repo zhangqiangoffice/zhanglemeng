@@ -18,7 +18,11 @@ router.post('/login', function(req, res) {
         var collection = db.collection('users');
         collection.find(user).toArray(function(err, docs) {
             if (docs.length === 1) {
-                req.session.user = user;
+                var user_session = {
+                    username : docs[0].username,
+                    _id : docs[0]._id,
+                }
+                req.session.user = user_session;
                 console.log(user.username + "登录成功");
                 res.json({result: 1, message: '登录成功'});
             } else {
