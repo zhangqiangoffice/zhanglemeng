@@ -6,7 +6,7 @@
 <body>
     <div >
         <div>个人身高记录</div>
-        <p>历史记录<%= list.length %></p>
+        <p>历史记录(<%= list.length %>)</p>
         <ul>
             <% list.forEach(function(item){%>
                 <li><span><%=item.date.toString() %> </span> 身高：<span><%=item.value %></span>cm</li>

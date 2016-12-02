@@ -6,11 +6,11 @@
 <body>
     <div >
         <div>个人身高记录</div>
-        <p>历史记录</p>
+        <p>历史记录(<%= list.length %>)</p>
         <ul>
-            <li><span>2016-11-30 </span> <span>165</span>cm</li>
-            <li><span>2015-11-30 </span> <span>155</span>cm</li>
-            <li><span>2014-11-30 </span> <span>145</span>cm</li>
+            <% list.forEach(function(item){%>
+                <li><span><%=item.date.toString() %> </span> 体重：<span><%=item.value %></span>cm</li>
+            <% }) %>
         </ul>
     </div>
     <script src="http://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
