@@ -7,17 +7,39 @@
     <div >
         <div>个人血压记录</div>
         <p>添加新记录</p>
-        <label>低压<input type="text" id="low" /></label>
-        <label>高压<input type="text" id='hi'/></label>
+        <table>
+            <tbody>
+                <tr>
+                    <td>低压</td>
+                    <td><input type="text" id="low" /></td>
+                </tr>
+                <tr>
+                    <td>高压</td>
+                    <td><input type="text" id="hi" /></td>
+                </tr>
+                <tr>
+                    <td>时间</td>
+                    <td><input type="text" id="date" /></td>
+                    <td><button type="button" id="now">使用当前时间</button></td>
+                </tr>
+            </tbody>
+        </table>
+        <label></label>
         <button type="button" id="submit">提交</button>
     </div>
     <script src="http://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/public.js"></script>
     <script type="text/javascript">
         $(function(){
+            $('#date').val(nowString());
+            $('#now').click(function() {
+                $('#date').val(nowString());
+            });
             $('#submit').click(function(){
                 var datas = {
                     low: $('#low').val(),
                     hi: $('#hi').val(),
+                    date: $('#date').val(),
                 }
                 $(this).text('数据保存中...').attr("disabled", "disabled");
                 $.ajax({

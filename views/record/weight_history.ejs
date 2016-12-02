@@ -9,39 +9,9 @@
         <p>历史记录(<%= list.length %>)</p>
         <ul>
             <% list.forEach(function(item){%>
-                <li><span><%=item.date.toString() %> </span> 体重：<span><%=item.value %></span>cm</li>
+                <li><span><%=item.date %> </span> 体重：<span><%=item.value %></span>cm</li>
             <% }) %>
         </ul>
     </div>
-    <script src="http://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            $('#submit').click(function(){
-                var datas = {
-                    height: $('#height').val(),
-                }
-                $.ajax({
-                    url: "",
-                    data: datas,
-                    type: "post",
-                    dataType: "json",
-                    success:function(msg){
-                        //console.log(msg);
-                        if (msg.result === 1) {
-                            window.location.href = './height_history';
-                        } else {
-                            alert(msg.message);
-                        }
-                        
-                    }
-                });
-            });
-
-            $('#register').click(function(){
-                window.location.href = './register'
-            });
-
-        });
-    </script>
 </body>
 </html>

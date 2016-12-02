@@ -70,12 +70,10 @@ router.get('/height_history', function(req, res) {
         MongoClient.connect(dburl, function(err, db) {
             var collection = db.collection('heights');
             collection.find(target).toArray(function(err, docs) {
-                console.log(docs);
                 var values = [];
                 docs.forEach(function(item){
                     values.push({date: timeToString(item.date), value: item.value});
                 });
-
                 console.log("获取身高历史记录成功");
                 res.render('record/height_history', {list: values});
                 db.close();
@@ -89,8 +87,21 @@ router.get('/weight_history', function(req, res) {
     if (!req.session.user) {
         res.redirect('../member/login');
     } else {
-        res.render('record/weight_history');
-        
+        var target = {
+            user_id: req.session.user._id
+        }
+        MongoClient.connect(dburl, function(err, db) {
+            var collection = db.collection('weights');
+            collection.find(target).toArray(function(err, docs) {
+                var values = [];
+                docs.forEach(function(item){
+                    values.push({date: timeToString(item.date), value: item.value});
+                });
+                console.log("获取体重历史记录成功");
+                res.render('record/weight_history', {list: values});
+                db.close();
+            })
+        });   
     }
 });
 
@@ -99,7 +110,21 @@ router.get('/blood_press_history', function(req, res) {
     if (!req.session.user) {
         res.redirect('../member/login');
     } else {
-        res.render('record/blood_press_history');
+        var target = {
+            user_id: req.session.user._id
+        }
+        MongoClient.connect(dburl, function(err, db) {
+            var collection = db.collection('blood_press');
+            collection.find(target).toArray(function(err, docs) {
+                var values = [];
+                docs.forEach(function(item){
+                    values.push({date: timeToString(item.date), low: item.low, hi: item.hi});
+                });
+                console.log("获取血压历史记录成功");
+                res.render('record/blood_press_history', {list: values});
+                db.close();
+            })
+        });
     }
 });
 
@@ -134,7 +159,7 @@ router.post('/weight', function(req, res) {
             var weight = {
                 user_id: req.session.user._id,
                 value: req.body.weight,
-                date: new Date(),
+                date: new Date(req.body.date),
             }
             collection.insert(weight, function(err, result){
                 console.log('插入一个新的身高记录到weights');
@@ -156,7 +181,7 @@ router.post('/blood_press', function(req, res) {
                 user_id: req.session.user._id,
                 hi: req.body.hi,
                 low: req.body.low,
-                date: new Date(),
+                date: new Date(req.body.date),
             }
             collection.insert(blood_press, function(err, result){
                 console.log('插入一个新的血压记录到blood_press');

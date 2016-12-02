@@ -1,47 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>个人身高记录</title>
+    <title>个人血压记录</title>
 </head>
 <body>
     <div >
-        <div>个人身高记录</div>
-        <p>历史记录</p>
+        <div>个人血压记录</div>
+        <p>历史记录(<%= list.length %>)</p>
         <ul>
-            <li><span>2016-11-30 </span> <span>165</span>cm</li>
-            <li><span>2015-11-30 </span> <span>155</span>cm</li>
-            <li><span>2014-11-30 </span> <span>145</span>cm</li>
+            <% list.forEach(function(item){%>
+                <li><span><%=item.date.toString() %> </span> 低压：<span><%=item.low %></span> 高压<%=item.hi %></li>
+            <% }) %>
         </ul>
     </div>
-    <script src="http://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
-    <script type="text/javascript">
-        $(function(){
-            $('#submit').click(function(){
-                var datas = {
-                    height: $('#height').val(),
-                }
-                $.ajax({
-                    url: "",
-                    data: datas,
-                    type: "post",
-                    dataType: "json",
-                    success:function(msg){
-                        //console.log(msg);
-                        if (msg.result === 1) {
-                            window.location.href = './height_history';
-                        } else {
-                            alert(msg.message);
-                        }
-                        
-                    }
-                });
-            });
-
-            $('#register').click(function(){
-                window.location.href = './register'
-            });
-
-        });
-    </script>
 </body>
 </html>
