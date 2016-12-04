@@ -6,7 +6,7 @@
 <body>
     <div >
         <div>个人身高记录</div>
-        <p>添加新记录 <a href="./height_history">历史数据</a></p>
+        <p>添加新记录 <a href="./history/heights">历史数据</a></p>
         <table>
             <tbody>
                 <tr>
@@ -28,32 +28,14 @@
     <script type="text/javascript" src="/static/js/public.js"></script>
     <script type="text/javascript">
         $(function(){
-            $('#date').val(nowString());
-            $('#now').click(function() {
-                $('#date').val(nowString());
-            });
             $('#submit').click(function(){
                 var datas = {
-                    height: $('#height').val(),
+                    value: $('#height').val(),
                     date: $('#date').val(),
+                    type: 'heights'
                 }
                 $(this).text('数据保存中...').attr("disabled", "disabled");
-                $.ajax({
-                    url: "",
-                    data: datas,
-                    type: "post",
-                    dataType: "json",
-                    success:function(msg){
-                        //console.log(msg);
-                        $('#submit').attr("disabled", false);
-                        if (msg.result === 1) {
-                            window.location.href = './height_history';
-                        } else {
-                            alert(msg.message);
-                        }
-                        
-                    }
-                });
+                saveRecord(datas);
             });
         });
     </script>

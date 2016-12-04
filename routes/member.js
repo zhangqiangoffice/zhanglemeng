@@ -37,7 +37,7 @@ router.post('/login', function(req, res) {
 //用户首页
 router.get('/index', function(req, res) {
     if (!req.session.user) {
-        res.redirect('./login');
+        res.redirect('/member/login');
     } else {
         res.render('member/index', {username: req.session.user.username});
     }
@@ -81,19 +81,19 @@ router.post('/register', function(req, res) {
 });
 
 //修改密码页
-router.get('/set', function(req, res) {
+router.get('/reset', function(req, res) {
     if (!req.session.user) {
-        res.redirect('./login');
+        res.redirect('/member/login');
     } else {
         
-        res.render('member/set');
+        res.render('member/reset');
     }
 });
 
 //修改新密码
 router.post('/set', function(req, res) {
     if (!req.session.user) {
-        res.redirect('./login');
+        res.redirect('/member/login');
     } else {
         MongoClient.connect(dburl, function(err, db) {
             var collection = db.collection('users');

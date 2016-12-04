@@ -27,3 +27,57 @@ function addZero(num) {
     }
     return no;
 }
+
+//保存某项记录
+function saveRecord(datas) {
+    $.ajax({
+        url: "./add",
+        data: datas,
+        type: "post",
+        dataType: "json",
+        success:function(msg){
+            if (msg.result === 1) {
+                window.location.href = './history/' + datas.type;
+            } else {
+                alert(msg.message);
+            }
+        }
+    });
+}
+
+$(function() {
+    
+    //日期控件，默认显示当前时间
+    $('#date').val(nowString());
+
+    //点击“使用当前时间”按钮
+    $('#now').click(function() {
+        $('#date').val(nowString());
+    });
+
+    //删除某项记录
+    $('.delete').click(function(){
+        if (confirm('确定删除？')) {
+            $(this).text('数据删除中...').attr("disabled", "disabled");
+            var datas = {
+                id: $(this).data('id'),
+                type: $(this).data('type')
+            }
+            $.ajax({
+                url: "../delete",
+                data: datas,
+                type: "post",
+                dataType: "json",
+                success:function(msg){
+                    $('.delete').attr("disabled", false);
+                    if (msg.result === 1) {
+                        window.location.reload();
+                    } else {
+                        alert(msg.message);
+                    }
+                    
+                }
+            });
+        }
+    });
+})

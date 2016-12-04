@@ -6,7 +6,7 @@
 <body>
     <div >
         <div>个人血压记录</div>
-        <p>添加新记录</p>
+        <p>添加新记录 <a href="./history/blood_press">历史数据</a></p>
         <table>
             <tbody>
                 <tr>
@@ -31,33 +31,15 @@
     <script type="text/javascript" src="/static/js/public.js"></script>
     <script type="text/javascript">
         $(function(){
-            $('#date').val(nowString());
-            $('#now').click(function() {
-                $('#date').val(nowString());
-            });
             $('#submit').click(function(){
                 var datas = {
                     low: $('#low').val(),
                     hi: $('#hi').val(),
                     date: $('#date').val(),
+                    type: 'blood_press'
                 }
                 $(this).text('数据保存中...').attr("disabled", "disabled");
-                $.ajax({
-                    url: "",
-                    data: datas,
-                    type: "post",
-                    dataType: "json",
-                    success:function(msg){
-                        //console.log(msg);
-                        $('#submit').attr("disabled", false);
-                        if (msg.result === 1) {
-                            window.location.href = './blood_press_history';
-                        } else {
-                            alert(msg.message);
-                        }
-                        
-                    }
-                });
+                saveRecord(datas);
             });
         });
     </script>

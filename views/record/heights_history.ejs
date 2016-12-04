@@ -1,19 +1,17 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>个人血压记录</title>
+    <title>个人身高记录</title>
 </head>
 <body>
     <div >
-        <div>个人血压记录</div>
+        <div>个人身高记录</div>
         <p>历史记录(<%= list.length %>)</p>
         <ul>
             <% list.forEach(function(item){%>
                 <li>
-                    <%=item.date.toString() %> 
-                    低压：<%=item.low %> 
-                    高压: <%=item.hi %>
-                    <button type="button" class="delete" data-id="<%=item.id %>" data-type="blood_press">删除</button>
+                    <%=item.date %> 身高：<%=item.value %>cm
+                    <button type="button" class="delete" data-id="<%=item.id %>" data-type="heights">删除</button>
                 </li>
             <% }) %>
         </ul>

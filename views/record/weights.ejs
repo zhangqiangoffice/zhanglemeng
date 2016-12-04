@@ -28,32 +28,14 @@
     <script type="text/javascript" src="/static/js/public.js"></script>
     <script type="text/javascript">
         $(function(){
-            $('#date').val(nowString());
-            $('#now').click(function() {
-                $('#date').val(nowString());
-            });
             $('#submit').click(function(){
                 var datas = {
-                    weight: $('#weight').val(),
+                    value: $('#weight').val(),
                     date: $('#date').val(),
+                    type: 'weights'
                 }
                 $(this).text('数据保存中...').attr("disabled", "disabled");
-                $.ajax({
-                    url: "",
-                    data: datas,
-                    type: "post",
-                    dataType: "json",
-                    success:function(msg){
-                        //console.log(msg);
-                        $('#submit').attr("disabled", false);
-                        if (msg.result === 1) {
-                            window.location.href = './weight_history';
-                        } else {
-                            alert(msg.message);
-                        }
-                        
-                    }
-                });
+                saveRecord(datas);
             });
         });
     </script>
