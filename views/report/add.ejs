@@ -1,56 +1,98 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>新增病例</title>
+    <title>新增报告</title>
 </head>
 <body>
-    <div >
-        <div><%= message%> </div>
-        <form method="post" enctype="multipart/form-data">
-            <table>
-                <tbody>
-                    <tr>
-                        <td colspan="2">基本信息</td>
-                    </tr>
-                    <tr>
-                        <td>性别：</td>
-                        <td>
-                            <input type="radio" name="gender" value="0">男</input>
-                            <input type="radio" name="gender" value="1">女</input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>出生年月：</td>
-                        <td><input type="text" name="birth"></td>
-                    </tr>
-                    <tr>
-                        <td colspan="2">疾病信息</td>
-                    </tr>
-                    <tr>
-                        <td>日期：</td>
-                        <td>
-                            <input type="text"></input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>主诉：</td>
-                        <td>
-                            <input type="text"></input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>体检：</td>
-                        <td>
-                            <input type="text"></input>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td></td>
-                        <td><button type="submit">提交</button></td>
-                    </tr>
-                </tbody>
-            </table>
-        </form>
-    </div>
+    <div>新增报告</div>
+    <table>
+        <tbody>
+            <tr>
+                <td colspan="2">基本信息</td>
+            </tr>
+            <% if(member.finished) { %>
+                <tr>
+                    <td>别名：</td>
+                    <td><%= member.alias %></td>
+                </tr>
+                <tr>
+                    <td>性别：</td>
+                    <td><%= member.gender %></td>
+                </tr>
+                <tr>
+                    <td>年龄：</td>
+                    <td><%= member.age %></td>
+                </tr>
+            <% } else { %>
+                <tr>
+                    <td>别名：</td>
+                    <td><input type="text" name="alias"></td>
+                </tr>
+                <tr>
+                    <td>性别：</td>
+                    <td>
+                        <input type="radio" name="gender" value="男">男</input>
+                        <input type="radio" name="gender" value="女">女</input>
+                    </td>
+                </tr>
+                <tr>
+                    <td>出生年月：</td>
+                    <td><input type="text" name="birth"></td>
+                </tr>
+            <% } %>
+        </tbody>
+    </table>
+
+    <table>
+        <tbody>
+            <tr>
+                <td colspan="2">疾病信息</td>
+            </tr>
+            <tr>
+                <td>时间：</td>
+                <td>
+                    <input type="text" id="date" />
+                </td>
+                <td>
+                    <button type="button" id="now">使用当前时间</button>
+                </td>
+            </tr>
+            <tr>
+                <td>主诉：</td>
+                <td>
+                    <input type="text"></input>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <tbody>
+            <tr>
+                <td colspan="2">数据信息：</td>
+                <td>
+                    <input type="text"></input>
+                </td>
+            </tr>
+            <tr>
+                <td></td>
+                <td><button type="button" id="submit">提交</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <script src="http://cdn.staticfile.org/jquery/3.1.1/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/js/public.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $('#submit').click(function(){
+                var datas = {
+                    low: $('#low').val(),
+                    hi: $('#hi').val(),
+                    date: $('#date').val(),
+                    type: 'blood_press'
+                }
+                $(this).text('数据保存中...').attr("disabled", "disabled");
+            });
+        });
+    </script>
 </body>
 </html>

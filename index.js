@@ -56,9 +56,9 @@ app.use(morgan('log: :remote-addr [:date[iso]] :status (:response-time ms) :meth
 // app.use('/ajax', ajax);
 // app.use('/api', api);
 // app.use('/excel', excel);
-app.use('/report', report);
 app.use('/member', member);
 app.use('/record', record);
+app.use('/report', report);
 
 app.get('/', function(req, res) {
     res.redirect('/report');
