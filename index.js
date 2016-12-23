@@ -19,6 +19,7 @@ var url = 'mongodb //localhost:27017/zhanglemeng -u zhangq -p 123456';
 var member = require('./routes/member');        //用户模块
 var report = require('./routes/report');        //诊断报告模块
 var record = require('./routes/record');        //数据记录模块
+var guzhidui = require('./routes/guzhidui');        //故纸堆网模块
 
 morgan.token('date',function(){return new Date().toLocaleString();});
 
@@ -59,9 +60,10 @@ app.use(morgan('log: :remote-addr [:date[iso]] :status (:response-time ms) :meth
 app.use('/member', member);
 app.use('/record', record);
 app.use('/report', report);
+app.use('/index', guzhidui);
 
 app.get('/', function(req, res) {
-    res.redirect('/report');
+    res.redirect('/index');
 });
 
 app.use(function(req, res) {
