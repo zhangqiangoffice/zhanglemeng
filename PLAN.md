@@ -21,37 +21,37 @@
 借鉴知乎的页面，追求简洁  
 1. 首页，纸条列表页  
 内容：个人头像、个人姓名、标签搜索框、标签（相当于主题）、纸条列表（一个纸条相当于一层楼）、写纸条按钮（相当于发帖按钮）  
-每个纸条有：作者信息（头像、姓名、正文节选、发表日期、评论条数）  
+每个纸条有：作者信息（头像、姓名、）、正文节选、发表日期、评论条数    
 
 
 
 ### 接口设计
-1. 注册接口
+1. 注册接口  
 发送：{name: '姓名', username:'uasdd@163.com', password: '123456'}  
 返回：{result: 1, name: '姓名', id: '987', pic: '#' }  
 
-2. 登录接口
+2. 登录接口  
 发送：{username: 'uasdd@163.com', password: '123456'}  
 返回：{result: 1, name:'姓名', id:'987', pic:'#' }  
       {result: 0, message: '用户名或密码不正确'}  
 
-3. 获取纸条列表数据
+3. 获取纸条列表数据  
 发送: {word: '', page: 0}  
 返回：{result: 1, list:[{author:{name: '姓名', id:'987', pic: '#'}, paper: {id:'', content: '秦时明月汉时关，万里长征人未还', tags[]}}]}  
 
-4. 新增纸条
+4. 新增纸条  
 发送：{content: '秦时明月汉时关，万里长征人未还', date: '2016-11-12', like: 12 tags:['秦', '汉', '明月']}  
 返回: {result: 1, tags[{word: '秦', id: '1', isNew: true},{word: '汉', id: '2', isNew: true},{word: '明月', id: '3', isNew: false}]}  
 
-5. 获取批注
+5. 获取批注  
 发送：{paperId: '', page: 0}  
 返回：{result: 1, list:[{author:{name: '姓名', id:'987', pic: '#'}, comment: '哈哈', date: '2016-11-12'}]}  
 
-6. 发表批注
+6. 发表批注  
 发送: {paperId: '', comment: '不哈哈'}  
 返回：{result: 1}  
 
-7. 退出登录
+7. 退出登录  
 发送：null  
 返回: {result: 1}  
 
