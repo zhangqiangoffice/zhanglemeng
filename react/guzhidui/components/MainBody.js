@@ -1,12 +1,12 @@
 import React from 'react'
 import KeyWord from './KeyWord'
-import PaperList from './PaperList'
+import PapersContainer from '../containers/PapersContainer'
 
 const MainBody = () => (
   <div className="main_body">
     <div className="left_body">
       <KeyWord word="秦始皇"/>
-      <PaperList />
+      <PapersContainer />
 
     </div>
     <div className="right_body"></div>

@@ -1,10 +1,13 @@
-import React from 'react'
-import Paper from './Paper'
+import React, { PropTypes } from 'react'
 
-const PaperList = () => (
+const PaperList = ({children}) => (
   <ul className="paper_list">
-    <Paper />
+    {children}
   </ul>
 )
+
+PaperList.propTypes = {
+  children: PropTypes.node
+}
 
 export default PaperList
