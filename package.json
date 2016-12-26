@@ -21,7 +21,8 @@
     "react-thunk": "^1.0.0",
     "redux": "^3.6.0",
     "redux-thunk": "^2.1.0",
-    "serve-favicon": "^2.3.0"
+    "serve-favicon": "^2.3.0",
+    "z-ajax": "^1.0.4"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"

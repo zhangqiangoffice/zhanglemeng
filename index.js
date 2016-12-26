@@ -10,7 +10,6 @@ var url = 'mongodb //localhost:27017/zhanglemeng -u zhangq -p 123456';
 
 // var ablum = require('./routes/ablum');
 // var ajax = require('./routes/ajax');
-// var api = require('./routes/api');
 // var excel = require('./routes/excel');
 // var ace = require('./routes/ace');
 
@@ -20,6 +19,7 @@ var member = require('./routes/member');        //用户模块
 var report = require('./routes/report');        //诊断报告模块
 var record = require('./routes/record');        //数据记录模块
 var guzhidui = require('./routes/guzhidui');        //故纸堆网模块
+var api = require('./routes/api');      //api接口
 
 morgan.token('date',function(){return new Date().toLocaleString();});
 
@@ -55,12 +55,12 @@ app.use(morgan('log: :remote-addr [:date[iso]] :status (:response-time ms) :meth
 
 // app.use('/ablum', ablum);
 // app.use('/ajax', ajax);
-// app.use('/api', api);
 // app.use('/excel', excel);
 app.use('/member', member);
 app.use('/record', record);
 app.use('/report', report);
 app.use('/index', guzhidui);
+app.use('/api', api);
 
 app.get('/', function(req, res) {
     res.redirect('/index');

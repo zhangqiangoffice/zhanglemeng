@@ -17,8 +17,28 @@ const paperBase = (state = data, action) => {
   }
 }
 
+const page = (state = 0, action) => {
+  switch (action.type) {
+    case RECEIVE_PAPERS:
+      return ++state
+    default:
+      return state
+  }
+}
+
+const word = (state = '', action) => {
+  switch (action.type) {
+    case RECEIVE_PAPERS:
+      return state
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
-  paperBase
+  paperBase,
+  page,
+  word,
 })
 
 export default rootReducer
