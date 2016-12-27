@@ -14,7 +14,6 @@ var findUserById = function(db, id, callback) {
     });
 };
 
-
 //返回真
 router.post('/true', function(req, res) {
     res.json({result: SUCCESS, message: '成功'});

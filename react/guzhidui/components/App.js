@@ -1,11 +1,14 @@
 import React from 'react'
-import TitleBar from './TitleBar'
+import TitleBarContainer from '../containers/TitleBarContainer'
 import MainBody from './MainBody'
+import LoadingContainer from '../containers/LoadingContainer'
 
 const App = () => (
   <div>
-    <TitleBar />
+    <TitleBarContainer />
     <MainBody />
+    <LoadingContainer />
+
   </div>
 )
 
