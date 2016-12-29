@@ -1,18 +1,15 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class Loading extends Component {
+const Loading = (isLoading) => {
+    if (!isLoading) {
+        return null;
+    }
 
-    render() {
-        if (!this.props.isLoading) {
-            return null;
-        }
-
-        return (
-            <div className="loading">
-                <img src='/static/img/public/loading.gif' />
-            </div>
-        );
-    };
+    return (
+        <div className="loading">
+            <img src='/static/img/public/loading.gif' />
+        </div>
+    );
 }
 
 export default Loading
