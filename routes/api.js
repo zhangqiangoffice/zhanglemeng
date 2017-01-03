@@ -76,6 +76,13 @@ router.post('/login', function(req, res) {
     });
 });
 
-
+//验证登录是否有效
+router.post('/check', function(req, res) {
+    if (!req.session.user) {
+        res.json({result: 0, message: '登录失效'});
+    } else {
+        res.json({result: 1, message: '登录有效'});
+    }
+});
 
 module.exports = router;

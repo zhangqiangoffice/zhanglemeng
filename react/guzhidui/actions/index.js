@@ -9,19 +9,19 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const INIT_LOCAL_STORAGE = 'INIT_LOCAL_STORAGE'
 
 
-
 //获取纸条列表
 const receivePapers = papers => ({
   type: RECEIVE_PAPERS,
   papers: papers
 })
 
+//首次打开页面，获取纸条，初始化登录值
 export const getAllPapers = () => (dispatch, getState) => { 
+  
   let has = window.localStorage.gzd_has
-  let name = window.localStorage.gzd_name
-  let username = window.localStorage.gzd_username
-
   if (has) {
+    let name = window.localStorage.gzd_name
+    let username = window.localStorage.gzd_username
     dispatch(initLocalStorage(name, username))
   }
 
@@ -80,3 +80,16 @@ export const initLocalStorage = (name, username) => ({
   name,
   username,
 })
+
+//检查是否登录，未登录则登录，已登录则打开发纸条框
+export const goWritePaper = () => (dispatch, getState) => {
+  api.check(getState(), msg => {
+    
+    if (msg.result === 1) {
+
+      dispatch(loginSuccess(msg.name))
+    } else {
+      alert(msg.message)
+    } 
+  })
+}

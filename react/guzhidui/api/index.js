@@ -19,3 +19,11 @@ export const login = (state, cb) => {
 
   zAJAX('api/login', datas, cb)
 }
+
+export const check = (state, cb) => {
+  let datas = {
+    username: state.username,
+  }
+
+  zAJAX('api/check', datas, cb)
+}

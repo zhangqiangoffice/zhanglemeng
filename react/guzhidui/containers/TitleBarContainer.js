@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { goLogin } from '../actions'
+import { goLogin, goWritePaper } from '../actions'
 import TitleBar from '../components/TitleBar'
 
 const mapStateToProps = (state) => ({
@@ -10,6 +10,9 @@ const mapStateToProps = (state) => ({
 const mapDispatchToProps = (dispatch, state) => ({
   onGoLogin: () => {
     dispatch(goLogin())
+  },
+  onCheck: () => {
+    dispatch(goWritePaper())
   }
 })
   
