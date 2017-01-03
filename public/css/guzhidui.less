@@ -11,13 +11,18 @@
 
 @images: "/static/img";
 
+/*颜色*/
+@main-color: #a0522d;
+@main-light: #CD853F;
+@main-dark: #8b4513;
+
 .title_bar {
     .p-f;
     top:0;
     left: 0;
     z-index: 20;
     .w100;
-    background-color: #a0522d;
+    background-color: @main-color;
     height: 46px;
 
     .bar_main {
@@ -41,7 +46,7 @@
             font-size: 14px;
             line-height: 17px;
             background-color: #F0E68C;
-            border: 1px solid #8b4513;
+            border: 1px solid @main-dark;
             border-radius: 4px 0 0 4px;
             box-shadow: inset 0 1px 3px rgba(0,0,0,.2),0 1px 0 rgba(255,255,255,.1);
             outline: 0;
@@ -49,11 +54,11 @@
 
         .search {
             height: 33px;
-            border: 1px solid #8B4513;
+            border: 1px solid @main-dark;
             vertical-align: top;
             margin-top: 7px;
             margin-left: -1px;
-            background-color: #CD853F;
+            background-color: @main-light;
             border-radius: 0 4px 4px 0;
             color: #fff;
         }
@@ -135,5 +140,45 @@
         bottom: 0;
         margin: auto;
     }
+}
+
+//登陆框样式
+.login_box {
+    .p-f;
+    width: 300px;
+    height: 200px;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    border: 1px solid #ccc;
+    background-color: #fff;
+    .t-c;
+    z-index: 101;
+
+    table {
+        margin-top: 30px;
+        width: 70%;
+        margin-left: 15%;
+
+        input {
+            border: 1px solid #ccc;
+            margin: 5px 0;
+            padding: 5px;
+        }
+
+        button {
+            background-color: @main-color;
+            border: 1px solid @main-dark;
+            color: #fff;
+            .w100;
+            padding: 5px 0;
+            margin-top: 10px;
+            .pointer;
+            .radius;
+        }
+    }
+
 }
 

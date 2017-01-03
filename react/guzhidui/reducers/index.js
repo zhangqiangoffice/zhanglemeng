@@ -39,7 +39,7 @@ const word = (state = '', action) => {
   }
 }
 
-//是否登录
+//是否已经登录
 const hasLogin = (state = false, action) => {
   switch (action.type) {
     case RECEIVE_PAPERS:
@@ -48,6 +48,18 @@ const hasLogin = (state = false, action) => {
       return state
   }
 }
+
+//是否显示登陆框正在登陆
+const isLogining = (state = false, action) => {
+  switch (action.type) {
+    case GO_LOGIN:
+      return true
+    default:
+      return state
+  }
+}
+
+
 
 //显隐加载中遮罩层
 const isLoading = (state = false, action) => {
@@ -59,14 +71,13 @@ const isLoading = (state = false, action) => {
   }
 }
 
-
-
 const rootReducer = combineReducers({
   paperBase,
   page,
   word,
   hasLogin,
   isLoading,
+  isLogining,
 })
 
 export default rootReducer
