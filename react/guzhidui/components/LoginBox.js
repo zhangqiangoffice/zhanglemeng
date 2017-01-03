@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LoginBox = ({isLogining}) => {
+const LoginBox = ({isLogining, username, password, changeUsername, changePassword, onSubmit}) => {
   if (!isLogining) {
     return null;
   }
@@ -13,17 +13,17 @@ const LoginBox = ({isLogining}) => {
             <tr>
               <td>账号：</td>
               <td>
-                <input type="text" id="username" placeholder="请输入手机、邮箱或身份证"></input>
+                <input type="text" placeholder="请输入手机、邮箱" value={username} onChange={changeUsername}></input>
               </td>
             </tr>
             <tr>
               <td>密码：</td>
-              <td><input type="password" id="password" /></td>
+              <td><input type="password" value={password} onChange={changePassword}/></td>
             </tr>
             <tr>
               <td></td>
               <td>
-                <button type="button" id="login">登录</button>
+                <button type="button" id="login" onClick={onSubmit}>登录</button>
               </td>
             </tr>
           </tbody>

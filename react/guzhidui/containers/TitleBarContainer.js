@@ -4,20 +4,13 @@ import TitleBar from '../components/TitleBar'
 
 const mapStateToProps = (state) => ({
   hasLogin: state.hasLogin,
-  userName: state.userName,
+  name: state.name,
 })
 
 const mapDispatchToProps = (dispatch, state) => ({
   onGoLogin: () => {
-    console.log(123);
     dispatch(goLogin())
   }
-  // onClick: (comId, comName) => {
-  //   dispatch(changeInsuranceCom(comId, comName))
-  //   if (comId !== 1) {
-  //     dispatch(askOrders())
-  //   }
-  // }
 })
   
 const TitleBarContainer = connect(

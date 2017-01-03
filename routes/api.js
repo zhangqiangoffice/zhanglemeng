@@ -25,7 +25,7 @@ router.post('/false', function(req, res) {
 });
 
 //获取纸条列表
-router.post('/api001', function(req, res) {
+router.post('/getPapers', function(req, res) {
     var datas = {
         word: req.body.word,
         password: req.body.password
@@ -47,6 +47,32 @@ router.post('/api001', function(req, res) {
         } else {
         }
         db.close();
+    });
+});
+
+//提交密码，验证登录
+router.post('/login', function(req, res) {
+    var user={
+        username: req.body.username,
+        password: req.body.password
+    }
+    MongoClient.connect(dburl, function(err, db) {
+        var collection = db.collection('users');
+        collection.find(user).toArray(function(err, docs) {
+            if (docs.length === 1) {
+                var user_session = {
+                    username : docs[0].username,
+                    _id : docs[0]._id,
+                }
+                req.session.user = user_session;
+                console.log(user.username + "登录成功");
+                res.json({result: 1, message: '登录成功', name: docs[0].name, username: docs[0].username});
+            } else {
+                req.session.error = "用户名或密码不正确";
+                res.json({result: 0, message: '用户名或密码不正确'});
+            }
+            db.close();
+        })
     });
 });
 

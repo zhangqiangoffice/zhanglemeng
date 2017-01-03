@@ -1,9 +1,7 @@
 import { combineReducers } from 'redux'
 
-import {
-  RECEIVE_PAPERS,
-  GO_LOGIN
-} from '../actions'
+import * as act from '../actions'
+
 
 const data = {
   'qsh': [{author:{name: '姓名', id:'987'}, paper: {id:'456', content: '秦时明月汉时关，万里长征人未还', date: '2016-12-25'}}, {author:{name: '小七', id:'988'}, paper: {id:'457', content: '很久很久以前'}}]
@@ -12,7 +10,7 @@ const data = {
 //纸条列表数据库
 const paperBase = (state = data, action) => {
   switch (action.type) {
-    case RECEIVE_PAPERS:
+    case act.RECEIVE_PAPERS:
       return state.qsh.concat(action.papers)
     default:
       return state
@@ -22,7 +20,7 @@ const paperBase = (state = data, action) => {
 //页数，分页获取纸条列表
 const page = (state = 0, action) => {
   switch (action.type) {
-    case RECEIVE_PAPERS:
+    case act.RECEIVE_PAPERS:
       return ++state
     default:
       return state
@@ -32,7 +30,7 @@ const page = (state = 0, action) => {
 //标签关键字
 const word = (state = '', action) => {
   switch (action.type) {
-    case RECEIVE_PAPERS:
+    case act.RECEIVE_PAPERS:
       return state
     default:
       return state
@@ -42,8 +40,9 @@ const word = (state = '', action) => {
 //是否已经登录
 const hasLogin = (state = false, action) => {
   switch (action.type) {
-    case RECEIVE_PAPERS:
-      return state
+    case act.LOGIN_SUCCESS:
+    case act.INIT_LOCAL_STORAGE:
+      return true
     default:
       return state
   }
@@ -52,20 +51,56 @@ const hasLogin = (state = false, action) => {
 //是否显示登陆框正在登陆
 const isLogining = (state = false, action) => {
   switch (action.type) {
-    case GO_LOGIN:
+    case act.GO_LOGIN:
       return true
+    case act.LOGIN_SUCCESS:
+      return false
     default:
       return state
   }
 }
 
-
-
 //显隐加载中遮罩层
 const isLoading = (state = false, action) => {
   switch (action.type) {
-    case GO_LOGIN:
+    case act.GO_LOGIN:
       return true
+    case act.LOGIN_SUCCESS:
+      return false
+    default:
+      return state
+  }
+}
+
+//登录用户名
+const username = (state = '', action) => {
+  switch (action.type) {
+    case act.CHANGE_USERNAME:
+    case act.INIT_LOCAL_STORAGE:
+      return action.username
+    default:
+      return state
+  }
+}
+
+//登录密码
+const password = (state = '', action) => {
+  switch (action.type) {
+    case act.CHANGE_PASSWORD:
+      return action.val
+    case act.LOGIN_SUCCESS:
+      return ''
+    default:
+      return state
+  }
+}
+
+//姓名
+const name = (state = '', action) => {
+  switch (action.type) {
+    case act.LOGIN_SUCCESS:
+    case act.INIT_LOCAL_STORAGE:
+      return action.name
     default:
       return state
   }
@@ -78,6 +113,9 @@ const rootReducer = combineReducers({
   hasLogin,
   isLoading,
   isLogining,
+  username,
+  password,
+  name,
 })
 
 export default rootReducer
