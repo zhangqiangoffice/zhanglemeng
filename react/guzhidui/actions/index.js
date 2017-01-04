@@ -7,6 +7,9 @@ export const CHANGE_USERNAME = 'CHANGE_USERNAME'
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const INIT_LOCAL_STORAGE = 'INIT_LOCAL_STORAGE'
+export const SHOW_PAPER_BOX = 'SHOW_PAPER_BOX'
+export const CHANGE_PAPER_CONTENT = 'CHANGE_PAPER_CONTENT'
+
 
 
 //获取纸条列表
@@ -86,8 +89,34 @@ export const goWritePaper = () => (dispatch, getState) => {
   api.check(getState(), msg => {
     
     if (msg.result === 1) {
+      if (msg.check) {
+        dispatch(showPaperBox())
+      } else {
+        dispatch(goLogin())
+      }
+    } else {
+      alert(msg.message)
+    } 
+  })
+}
 
-      dispatch(loginSuccess(msg.name))
+//显示写纸条输入框
+export const showPaperBox = () => ({
+  type: SHOW_PAPER_BOX,
+})
+
+//编辑写纸条的内容
+export const changePaperContent = (val) => ({
+  type: CHANGE_PAPER_CONTENT,
+  val,
+})
+
+//发表新纸条
+export const submitPaper = () => (dispatch, getState) => {
+  api.submitPaper(getState(), msg => {
+    
+    if (msg.result === 1) {
+      // dispatch(loginSuccess(msg.name))
     } else {
       alert(msg.message)
     } 

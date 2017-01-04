@@ -64,6 +64,7 @@ const isLogining = (state = false, action) => {
 const isLoading = (state = false, action) => {
   switch (action.type) {
     case act.GO_LOGIN:
+    case act.SHOW_PAPER_BOX:
       return true
     case act.LOGIN_SUCCESS:
       return false
@@ -106,6 +107,26 @@ const name = (state = '', action) => {
   }
 }
 
+//是否显示写纸条框
+const showPaperBox = (state = false, action) => {
+  switch (action.type) {
+    case act.SHOW_PAPER_BOX:
+      return true
+    default:
+      return state
+  }
+}
+
+//新写纸条的内容
+const paperContent = (state = '', action) => {
+  switch (action.type) {
+    case act.CHANGE_PAPER_CONTENT:
+      return action.val
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   paperBase,
   page,
@@ -116,6 +137,8 @@ const rootReducer = combineReducers({
   username,
   password,
   name,
+  showPaperBox,
+  paperContent,
 })
 
 export default rootReducer

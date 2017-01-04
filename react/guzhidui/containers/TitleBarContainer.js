@@ -11,7 +11,7 @@ const mapDispatchToProps = (dispatch, state) => ({
   onGoLogin: () => {
     dispatch(goLogin())
   },
-  onCheck: () => {
+  onGoWritePaper: () => {
     dispatch(goWritePaper())
   }
 })

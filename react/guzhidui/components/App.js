@@ -3,6 +3,7 @@ import TitleBarContainer from '../containers/TitleBarContainer'
 import MainBody from './MainBody'
 import LoadingContainer from '../containers/LoadingContainer'
 import LoginBoxContainer from '../containers/LoginBoxContainer'
+import PaperBoxContainer from '../containers/PaperBoxContainer'
 
 const App = () => (
   <div>
@@ -10,6 +11,7 @@ const App = () => (
     <MainBody />
     <LoadingContainer />
     <LoginBoxContainer />
+    <PaperBoxContainer />
 
   </div>
 )

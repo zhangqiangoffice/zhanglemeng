@@ -63,6 +63,7 @@ router.post('/login', function(req, res) {
                 var user_session = {
                     username : docs[0].username,
                     _id : docs[0]._id,
+                    name: docs[0].name
                 }
                 req.session.user = user_session;
                 console.log(user.username + "登录成功");
@@ -79,9 +80,34 @@ router.post('/login', function(req, res) {
 //验证登录是否有效
 router.post('/check', function(req, res) {
     if (!req.session.user) {
+        res.json({result: 1, check: false, message: '登录失效'});
+    } else {
+        res.json({result: 1, check: true, message: '登录有效'});
+    }
+});
+
+//写新纸条
+router.post('/submitPaper', function(req, res) {
+    if (!req.session.user) {
         res.json({result: 0, message: '登录失效'});
     } else {
-        res.json({result: 1, message: '登录有效'});
+        MongoClient.connect(dburl, function(err, db) {
+            var collection = db.collection('papers');
+            var datas = {
+                content: req.body.paperContent,
+                date: new Date(),
+                author: {
+                    _id: req.session.user._id,
+                    name: req.session.user.name
+                }
+            }
+            
+            collection.insert(datas, function(err, result){
+                console.log('插入一个新的记录到papers');
+                res.json({result: 1, message: '数据保存成功'});
+                db.close();
+            });
+        });
     }
 });
 
