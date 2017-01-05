@@ -1,10 +1,8 @@
 import zAJAX from 'z-ajax'
 
-const _products = {result: 1, list: []}
-
 //获取纸条列表
 export const getPapers = (state, cb) => {
-  let datas = {
+  const datas = {
     word: state.word,
     page: state.page
   }
@@ -14,7 +12,7 @@ export const getPapers = (state, cb) => {
 
 //登录接口
 export const login = (state, cb) => {
-  let datas = {
+  const datas = {
     username: state.username,
     password: state.password
   }
@@ -24,7 +22,7 @@ export const login = (state, cb) => {
 
 //检查登录是否有效
 export const check = (state, cb) => {
-  let datas = {
+  const datas = {
     username: state.username,
   }
 
@@ -33,9 +31,30 @@ export const check = (state, cb) => {
 
 //提交新纸条
 export const submitPaper = (state, cb) => {
-  let datas = {
+  const datas = {
     paperContent: state.paperContent,
   }
 
   zAJAX('api/submitPaper', datas, cb)
+}
+
+//数字前补零
+const tran_val = (val) => {
+  if((val - 0) < 10){
+    val = "0" + val;
+  }
+  return val;
+}
+
+//日期转字符串
+export const dateToString = (time) => {
+  const datenew = new Date(time); 
+
+  const year = datenew.getFullYear(); 
+  const month = tran_val(datenew.getMonth() + 1);
+  const date = tran_val(datenew.getDate()); 
+  const hour = tran_val(datenew.getHours());
+  const minute = tran_val(datenew.getMinutes()); 
+
+  return year + '-' + month + '-' + date + ' ' + hour + ':' + minute;
 }

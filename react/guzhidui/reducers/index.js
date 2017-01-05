@@ -2,16 +2,11 @@ import { combineReducers } from 'redux'
 
 import * as act from '../actions'
 
-
-const data = {
-  'qsh': [{author:{name: '姓名', id:'987'}, paper: {id:'456', content: '秦时明月汉时关，万里长征人未还', date: '2016-12-25'}}, {author:{name: '小七', id:'988'}, paper: {id:'457', content: '很久很久以前'}}]
-}
-
-//纸条列表数据库
-const paperBase = (state = data, action) => {
+//纸条列表
+const paperList = (state = [], action) => {
   switch (action.type) {
     case act.RECEIVE_PAPERS:
-      return state.qsh.concat(action.papers)
+      return state.concat(action.papers)
     default:
       return state
   }
@@ -128,7 +123,7 @@ const paperContent = (state = '', action) => {
 }
 
 const rootReducer = combineReducers({
-  paperBase,
+  paperList,
   page,
   word,
   hasLogin,

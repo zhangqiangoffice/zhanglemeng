@@ -31,7 +31,7 @@ export const getAllPapers = () => (dispatch, getState) => {
   api.getPapers(getState(), msg => {
     
     if (msg.result === 1) {
-      // dispatch(receivePapers(msg.list))
+      dispatch(receivePapers(msg.list))
     } else {
       alert(msg.message)
     } 

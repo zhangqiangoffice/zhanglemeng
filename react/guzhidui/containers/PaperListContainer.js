@@ -3,20 +3,20 @@ import { connect } from 'react-redux'
 import Paper from '../components/Paper'
 import PaperList from '../components/PaperList'
 
-const PapersContainer = ({ paperList }) => (
+const PaperListContainer = ({ paperList }) => (
   <PaperList>
-    {paperList.map(paperData =>
+    {paperList.map(paper =>
       <Paper
-        key={paperData.paper.id}
-        paperData={paperData} />
+        key={paper._id}
+        paper={paper} />
     )}
   </PaperList>
 )
 
 const mapStateToProps = state => ({
-  paperList: state.paperBase.qsh
+  paperList: state.paperList
 })
 
 export default connect(
   mapStateToProps
-)(PapersContainer)
+)(PaperListContainer)

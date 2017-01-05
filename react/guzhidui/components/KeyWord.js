@@ -1,8 +1,8 @@
 import React from 'react'
 
-const KeyWord = () => (
+const KeyWord = ({word}) => (
   <div className="key_word">
-    秦始皇
+    {word}
   </div>
 )
 
