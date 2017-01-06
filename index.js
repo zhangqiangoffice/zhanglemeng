@@ -45,7 +45,7 @@ app.use(session({
     resave:true,
     saveUninitialized:false,
     cookie:{
-        maxAge:1000*60*10 //过期时间设置(单位毫秒)
+        // maxAge:1000*60*10 //过期时间设置(单位毫秒)
     }
 }));
 

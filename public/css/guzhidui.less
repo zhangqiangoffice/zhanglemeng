@@ -87,6 +87,7 @@
     }
 }
 
+//主体部分
 .main_body {
     .p-r;
     margin: 60px auto;
@@ -197,7 +198,7 @@
 //写新纸条的框
 .paper_box {
     .p-f;
-    .size(400px, 300px);
+    .size(400px, 340px);
     top: 0;
     left: 0;
     right: 0;
@@ -210,7 +211,7 @@
 
     textarea {
         .size(360px, 200px);
-        border: 1px solid #ccc;
+        border: @border;
         margin: 20px 0 10px;
         padding: 3px 8px;
     }
@@ -224,6 +225,26 @@
         margin-top: 10px;
         .pointer;
         .radius;
+    }
+
+    ul {
+        .clearfix;
+        padding: 0 20px;
+
+        li {
+            .f-l;
+            margin-right: 29px;
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            input {
+                width: 100px;
+                border: @border;
+                text-indent: 5px;
+            }
+        }
     }
 }
 

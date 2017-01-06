@@ -9,8 +9,9 @@ export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const INIT_LOCAL_STORAGE = 'INIT_LOCAL_STORAGE'
 export const SHOW_PAPER_BOX = 'SHOW_PAPER_BOX'
 export const CHANGE_PAPER_CONTENT = 'CHANGE_PAPER_CONTENT'
-
-
+export const CHANGE_KEY1 = 'CHANGE_KEY1'
+export const CHANGE_KEY2 = 'CHANGE_KEY2'
+export const CHANGE_KEY3 = 'CHANGE_KEY3'
 
 //获取纸条列表
 const receivePapers = papers => ({
@@ -108,6 +109,24 @@ export const showPaperBox = () => ({
 //编辑写纸条的内容
 export const changePaperContent = (val) => ({
   type: CHANGE_PAPER_CONTENT,
+  val,
+})
+
+//编辑写标签1的内容
+export const changeKey1 = (val) => ({
+  type: CHANGE_KEY1,
+  val,
+})
+
+//编辑写标签2的内容
+export const changeKey2 = (val) => ({
+  type: CHANGE_KEY2,
+  val,
+})
+
+//编辑写标签3的内容
+export const changeKey3 = (val) => ({
+  type: CHANGE_KEY3,
   val,
 })
 

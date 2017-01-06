@@ -122,6 +122,36 @@ const paperContent = (state = '', action) => {
   }
 }
 
+//标签1的内容
+const key1 = (state = '', action) => {
+  switch (action.type) {
+    case act.CHANGE_KEY1:
+      return action.val
+    default:
+      return state
+  }
+}
+
+//标签2的内容
+const key2 = (state = '', action) => {
+  switch (action.type) {
+    case act.CHANGE_KEY2:
+      return action.val
+    default:
+      return state
+  }
+}
+
+//标签3的内容
+const key3 = (state = '', action) => {
+  switch (action.type) {
+    case act.CHANGE_KEY3:
+      return action.val
+    default:
+      return state
+  }
+}
+
 const rootReducer = combineReducers({
   paperList,
   page,
@@ -134,6 +164,9 @@ const rootReducer = combineReducers({
   name,
   showPaperBox,
   paperContent,
+  key1,
+  key2,
+  key3,
 })
 
 export default rootReducer

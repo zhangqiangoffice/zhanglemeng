@@ -33,6 +33,9 @@ export const check = (state, cb) => {
 export const submitPaper = (state, cb) => {
   const datas = {
     paperContent: state.paperContent,
+    key1: state.key1,
+    key2: state.key2,
+    key3: state.key3,
   }
 
   zAJAX('api/submitPaper', datas, cb)

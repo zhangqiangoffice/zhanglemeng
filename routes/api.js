@@ -99,11 +99,12 @@ router.post('/submitPaper', function(req, res) {
                 author: {
                     _id: req.session.user._id,
                     name: req.session.user.name
-                }
+                },
+                tags: [req.body.key1, req.body.key2, req.body.key3]
             }
             
             collection.insert(datas, function(err, result){
-                console.log('插入一个新的记录到papers');
+                console.log(`${req.session.user.username}插入一个新的记录到papers`);
                 res.json({result: 1, message: '数据保存成功'});
                 db.close();
             });
