@@ -12,6 +12,7 @@ export const CHANGE_PAPER_CONTENT = 'CHANGE_PAPER_CONTENT'
 export const CHANGE_KEY1 = 'CHANGE_KEY1'
 export const CHANGE_KEY2 = 'CHANGE_KEY2'
 export const CHANGE_KEY3 = 'CHANGE_KEY3'
+export const CHANGE_WORD = 'CHANGE_WORD'
 
 //获取纸条列表
 const receivePapers = papers => ({
@@ -141,3 +142,9 @@ export const submitPaper = () => (dispatch, getState) => {
     } 
   })
 }
+
+//修改搜索关键字
+export const changeWord = (word) => ({
+  type: CHANGE_WORD,
+  word,
+})

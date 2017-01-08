@@ -25,8 +25,8 @@ const page = (state = 0, action) => {
 //标签关键字
 const word = (state = '', action) => {
   switch (action.type) {
-    case act.RECEIVE_PAPERS:
-      return state
+    case act.CHANGE_WORD:
+      return state.word
     default:
       return state
   }
