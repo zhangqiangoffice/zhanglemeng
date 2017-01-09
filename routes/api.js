@@ -5,6 +5,7 @@ var dburl = 'mongodb://zhangq:123456@ds111748.mlab.com:11748/zhanglemeng';
 
 const FAIL = 0;
 const SUCCESS = 1;
+const PAGE_SIZE = 5;
 
 //返回真
 router.post('/true', function(req, res) {
@@ -26,11 +27,11 @@ router.post('/getPapers', function(req, res) {
         var collection = db.collection('papers');
         console.log("查询纸条列表--" + datas.word);
         if (datas.word === '') {
-          collection.find({}).toArray(function(err, docs) {  
+          collection.find({}).skip((datas.page - 0) * PAGE_SIZE ).limit(PAGE_SIZE).toArray(function(err, docs) {  
             res.json({result: SUCCESS, message: '获取纸条列表成功', list: docs, word: datas.word});
           })
         } else {
-          collection.find({"tags": datas.word}).toArray(function(err, docs) {  
+          collection.find({"tags": datas.word}).skip((datas.page - 0) * PAGE_SIZE ).limit(PAGE_SIZE).toArray(function(err, docs) {  
             res.json({result: SUCCESS, message: '获取纸条列表成功', list: docs, word: datas.word});
           })
         }
@@ -93,7 +94,7 @@ router.post('/submitPaper', function(req, res) {
             
             collection.insert(datas, function(err, result){
                 console.log(`${req.session.user.username}插入一个新的记录到papers`);
-                res.json({result: 1, message: '数据保存成功'});
+                res.json({result: 1, message: '数据保存成功', key1:req.body.key1});
                 db.close();
             });
         });

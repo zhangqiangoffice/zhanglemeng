@@ -1,7 +1,7 @@
 import React from 'react';
 
-const LoginBox = ({isLogining, username, password, changeUsername, changePassword, onSubmit}) => {
-  if (!isLogining) {
+const LoginBox = ({showLoginBox, username, password, changeUsername, changePassword, onSubmit}) => {
+  if (!showLoginBox) {
     return null;
   }
 

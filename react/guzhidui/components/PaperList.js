@@ -1,13 +1,14 @@
-import React, { PropTypes } from 'react'
+import React from 'react'
+import Paper from './Paper'
 
-const PaperList = ({children}) => (
-  <ul className="paper_list">
-    {children}
+const PaperList = ({paperList, isAsking, onCheckMore}) => (
+  <ul className="paper_list" onClick={onCheckMore}>
+    {paperList.map(paper =>
+      <Paper
+        key={paper._id}
+        paper={paper} />
+    )}
   </ul>
 )
-
-PaperList.propTypes = {
-  children: PropTypes.node
-}
 
 export default PaperList

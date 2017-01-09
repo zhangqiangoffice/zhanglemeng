@@ -15,6 +15,10 @@ export const CHANGE_KEY3 = 'CHANGE_KEY3'
 export const CHANGE_WORD = 'CHANGE_WORD'
 export const SEARCH_WORD = 'SEARCH_WORD'
 export const SHOW_LOADING = 'SHOW_LOADING'
+export const CLOSE_PAPER_BOX = 'CLOSE_PAPER_BOX'
+export const SUBMIT_SUCCESS = 'SUBMIT_SUCCESS'
+export const START_ASKING = 'START_ASKING'
+
 
 //获取纸条列表
 const receivePapers = (first, papers, word) => ({
@@ -48,7 +52,7 @@ export const getAllPapers = () => (dispatch, getState) => {
 
 //点击搜索按钮
 export const searchWord = () => (dispatch, getState) => { 
-  dispatch(showLoading());
+  dispatch(showLoading())
 
   api.getPapers(true, getState(), msg => {
     
@@ -59,6 +63,25 @@ export const searchWord = () => (dispatch, getState) => {
     } 
   })
 }
+
+//请求更多纸条
+export const askMorePapers = () => (dispatch, getState) => { 
+  // dispatch(startAsking())
+
+  api.getPapers(false, getState(), msg => {
+    
+    if (msg.result === 1) {
+      dispatch(receivePapers(false, msg.list , msg.word))
+    } else {
+      alert(msg.message)
+    } 
+  })
+}
+
+//开始请求更多纸条
+export const startAsking = () => ({
+  type: START_ASKING,
+})
 
 //点击登录按钮，打开登录框
 export const goLogin = () => ({
@@ -161,19 +184,35 @@ export const changeKey3 = (val) => ({
 
 //发表新纸条
 export const submitPaper = () => (dispatch, getState) => {
+  dispatch(showLoading())
+
   api.submitPaper(getState(), msg => {
     
     if (msg.result === 1) {
-      // dispatch(loginSuccess(msg.name))
+      dispatch(submitSuccess(msg.key1))
+      dispatch(searchWord())
+      alert('写新纸条成功！')
     } else {
       alert(msg.message)
+      dispatch(showPaperBox())
     } 
   })
 }
+
+//发表成功
+export const submitSuccess = (key1) => ({
+  type: SUBMIT_SUCCESS,
+  key1,
+})
 
 //修改搜索关键字
 export const changeWord = (word) => ({
   type: CHANGE_WORD,
   word,
 })
+
+//关闭写纸条框
+export const closePaperBox = () => (({
+  type: CLOSE_PAPER_BOX
+}))
 

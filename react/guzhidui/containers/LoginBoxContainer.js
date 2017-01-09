@@ -3,7 +3,7 @@ import { login, changeUsername, changePassword } from '../actions'
 import LoginBox from '../components/LoginBox'
 
 const mapStateToProps = (state) => ({
-  isLogining: state.isLogining,
+  showLoginBox: state.showLoginBox,
   username: state.username,
   password: state.password,
 })

@@ -27,6 +27,8 @@ const word = (state = '', action) => {
   switch (action.type) {
     case act.CHANGE_WORD:
       return action.word
+    case act.SUBMIT_SUCCESS:
+      return action.key1
     default:
       return state
   }
@@ -55,7 +57,7 @@ const hasLogin = (state = false, action) => {
 }
 
 //是否显示登陆框正在登陆
-const isLogining = (state = false, action) => {
+const showLoginBox = (state = false, action) => {
   switch (action.type) {
     case act.GO_LOGIN:
       return true
@@ -76,6 +78,7 @@ const isLoading = (state = true, action) => {
       return true
     case act.LOGIN_SUCCESS:
     case act.RECEIVE_PAPERS:
+    case act.CLOSE_PAPER_BOX:
       return false
     default:
       return state
@@ -121,6 +124,10 @@ const showPaperBox = (state = false, action) => {
   switch (action.type) {
     case act.SHOW_PAPER_BOX:
       return true
+    case act.CLOSE_PAPER_BOX:
+    case act.SHOW_LOADING:
+    case act.SUBMIT_SUCCESS:
+      return false
     default:
       return state
   }
@@ -131,6 +138,8 @@ const paperContent = (state = '', action) => {
   switch (action.type) {
     case act.CHANGE_PAPER_CONTENT:
       return action.val
+    case act.SUBMIT_SUCCESS:
+      return ''
     default:
       return state
   }
@@ -141,6 +150,8 @@ const key1 = (state = '', action) => {
   switch (action.type) {
     case act.CHANGE_KEY1:
       return action.val
+    case act.SUBMIT_SUCCESS:
+      return ''
     default:
       return state
   }
@@ -151,6 +162,8 @@ const key2 = (state = '', action) => {
   switch (action.type) {
     case act.CHANGE_KEY2:
       return action.val
+    case act.SUBMIT_SUCCESS:
+      return ''
     default:
       return state
   }
@@ -161,6 +174,23 @@ const key3 = (state = '', action) => {
   switch (action.type) {
     case act.CHANGE_KEY3:
       return action.val
+    case act.SUBMIT_SUCCESS:
+      return ''
+    default:
+      return state
+  }
+}
+
+//正在请求纸条
+const isAsking = (state = true, action) => {
+  switch (action.type) {
+    case act.RECEIVE_PAPERS:
+    case act.SUBMIT_SUCCESS:
+    case act.LOGIN_SUCCESS:
+      return false
+    case act.SHOW_LOADING:
+    case act.START_ASKING:
+      return true
     default:
       return state
   }
@@ -173,15 +203,16 @@ const rootReducer = combineReducers({
   keyWord,
   hasLogin,
   isLoading,
-  isLogining,
   username,
   password,
   name,
+  showLoginBox,
   showPaperBox,
   paperContent,
   key1,
   key2,
   key3,
+  isAsking,
 })
 
 export default rootReducer

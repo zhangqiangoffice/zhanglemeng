@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LoginBox = ({showPaperBox, paperContent, key1, key2, key3, onChangeKey1, onChangeKey2, onChangeKey3, onChangePaperContent, onSubmitPaper}) => {
+const LoginBox = ({showPaperBox, paperContent, key1, key2, key3, onChangeKey1, onChangeKey2, onChangeKey3, onChangePaperContent, onSubmitPaper, onClosePaper}) => {
   if (!showPaperBox) {
     return null;
   }
@@ -13,6 +13,7 @@ const LoginBox = ({showPaperBox, paperContent, key1, key2, key3, onChangeKey1, o
         <li><input type="text" placeholder="标签2" value={key2} onChange={onChangeKey2}/></li>
         <li><input type="text" placeholder="标签3" value={key3} onChange={onChangeKey3}/></li>
       </ul>
+      <button type="button" onClick={onClosePaper}>关闭</button>
       <button type="button" onClick={onSubmitPaper}>提交</button>
     </div>
   );

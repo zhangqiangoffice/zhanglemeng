@@ -7,7 +7,7 @@ const MainBody = () => (
     <div className="left_body">
       <KeyWordContainer />
       <PaperListContainer />
-
+      <i id="anchor"></i>
     </div>
     <div className="right_body"></div>
   </div>

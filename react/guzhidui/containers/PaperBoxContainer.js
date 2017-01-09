@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { changePaperContent, submitPaper, changeKey1, changeKey2, changeKey3 } from '../actions'
+import { changePaperContent, submitPaper, changeKey1, changeKey2, changeKey3, closePaperBox } from '../actions'
 import PaperBox from '../components/PaperBox'
 
 const mapStateToProps = (state) => ({
@@ -16,6 +16,9 @@ const mapDispatchToProps = (dispatch, state) => ({
   },
   onSubmitPaper: () => {
     dispatch(submitPaper())
+  },
+  onClosePaper: () => {
+    dispatch(closePaperBox())
   },
   onChangeKey1: (event) => {
     dispatch(changeKey1((event.target.value).trim()))
