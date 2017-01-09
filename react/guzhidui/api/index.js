@@ -1,10 +1,14 @@
 import zAJAX from 'z-ajax'
 
 //获取纸条列表
-export const getPapers = (state, cb) => {
+export const getPapers = (fisrt, state, cb) => {
   const datas = {
     word: state.word,
     page: state.page
+  }
+
+  if (fisrt) {
+    datas.page = 0
   }
 
   zAJAX('api/getPapers', datas, cb)
@@ -39,6 +43,15 @@ export const submitPaper = (state, cb) => {
   }
 
   zAJAX('api/submitPaper', datas, cb)
+}
+
+//提交搜索关键词
+export const searchWord = (state, cb) => {
+  const datas = {
+    word: state.word,
+  }
+
+  zAJAX('api/searchWord', datas, cb)
 }
 
 //数字前补零

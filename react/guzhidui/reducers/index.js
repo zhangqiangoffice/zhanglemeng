@@ -6,7 +6,7 @@ import * as act from '../actions'
 const paperList = (state = [], action) => {
   switch (action.type) {
     case act.RECEIVE_PAPERS:
-      return state.concat(action.papers)
+      return action.first ? action.papers : state.concat(action.papers)
     default:
       return state
   }
@@ -16,21 +16,32 @@ const paperList = (state = [], action) => {
 const page = (state = 0, action) => {
   switch (action.type) {
     case act.RECEIVE_PAPERS:
-      return ++state
+      return action.first ? 1 : ++state
     default:
       return state
   }
 }
 
-//标签关键字
+//搜索框标签关键字
 const word = (state = '', action) => {
   switch (action.type) {
     case act.CHANGE_WORD:
-      return state.word
+      return action.word
     default:
       return state
   }
 }
+
+//纸条列表顶部关键词
+const keyWord = (state = '', action) => {
+  switch (action.type) {
+    case act.RECEIVE_PAPERS:
+      return action.first ? action.word : state
+    default:
+      return state
+  }
+}
+
 
 //是否已经登录
 const hasLogin = (state = false, action) => {
@@ -49,6 +60,7 @@ const isLogining = (state = false, action) => {
     case act.GO_LOGIN:
       return true
     case act.LOGIN_SUCCESS:
+    case act.SHOW_LOADING:
       return false
     default:
       return state
@@ -56,12 +68,14 @@ const isLogining = (state = false, action) => {
 }
 
 //显隐加载中遮罩层
-const isLoading = (state = false, action) => {
+const isLoading = (state = true, action) => {
   switch (action.type) {
     case act.GO_LOGIN:
     case act.SHOW_PAPER_BOX:
+    case act.SHOW_LOADING:
       return true
     case act.LOGIN_SUCCESS:
+    case act.RECEIVE_PAPERS:
       return false
     default:
       return state
@@ -156,6 +170,7 @@ const rootReducer = combineReducers({
   paperList,
   page,
   word,
+  keyWord,
   hasLogin,
   isLoading,
   isLogining,

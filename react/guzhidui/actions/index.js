@@ -13,16 +13,21 @@ export const CHANGE_KEY1 = 'CHANGE_KEY1'
 export const CHANGE_KEY2 = 'CHANGE_KEY2'
 export const CHANGE_KEY3 = 'CHANGE_KEY3'
 export const CHANGE_WORD = 'CHANGE_WORD'
+export const SEARCH_WORD = 'SEARCH_WORD'
+export const SHOW_LOADING = 'SHOW_LOADING'
 
 //获取纸条列表
-const receivePapers = papers => ({
+const receivePapers = (first, papers, word) => ({
   type: RECEIVE_PAPERS,
-  papers: papers
+  first,
+  papers,
+  word,
 })
 
 //首次打开页面，获取纸条，初始化登录值
 export const getAllPapers = () => (dispatch, getState) => { 
   
+  //从本地获取用户信息
   let has = window.localStorage.gzd_has
   if (has) {
     let name = window.localStorage.gzd_name
@@ -30,10 +35,25 @@ export const getAllPapers = () => (dispatch, getState) => {
     dispatch(initLocalStorage(name, username))
   }
 
-  api.getPapers(getState(), msg => {
+  //请求首页纸条列表
+  api.getPapers(true, getState(), msg => {
     
     if (msg.result === 1) {
-      dispatch(receivePapers(msg.list))
+      dispatch(receivePapers(true, msg.list, msg.word))
+    } else {
+      alert(msg.message)
+    } 
+  })
+}
+
+//点击搜索按钮
+export const searchWord = () => (dispatch, getState) => { 
+  dispatch(showLoading());
+
+  api.getPapers(true, getState(), msg => {
+    
+    if (msg.result === 1) {
+      dispatch(receivePapers(true, msg.list , msg.word))
     } else {
       alert(msg.message)
     } 
@@ -45,8 +65,15 @@ export const goLogin = () => ({
   type: GO_LOGIN,
 })
 
+//显示遮罩层
+export const showLoading = () => ({
+  type: SHOW_LOADING,
+})
+
 //点击登录提交按钮
 export const login = () => (dispatch, getState) => {
+  dispatch(showLoading());
+
   api.login(getState(), msg => {
     
     if (msg.result === 1) {
@@ -57,6 +84,7 @@ export const login = () => (dispatch, getState) => {
       dispatch(loginSuccess(msg.name))
     } else {
       alert(msg.message)
+      dispatch(goLogin())
     } 
   })
 }
@@ -148,3 +176,4 @@ export const changeWord = (word) => ({
   type: CHANGE_WORD,
   word,
 })
+

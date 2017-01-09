@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { goLogin, goWritePaper, changeWord } from '../actions'
+import { goLogin, goWritePaper, changeWord, searchWord } from '../actions'
 import TitleBar from '../components/TitleBar'
 
 const mapStateToProps = (state) => ({
@@ -16,11 +16,15 @@ const mapDispatchToProps = (dispatch, state) => ({
     dispatch(goWritePaper())
   },
   onSearch: () => {
-    // dispatch()
+    dispatch(searchWord())
   },
   onChangeWord: (event) => {
-    console.log((event.target.value).trim());
     dispatch(changeWord((event.target.value).trim()))
+  },
+  onKeyUpEnter: (event) => {
+    if (event.keyCode === 13) {
+      dispatch(searchWord())
+    }
   }
 })
   
