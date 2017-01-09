@@ -66,7 +66,7 @@ export const searchWord = () => (dispatch, getState) => {
 
 //请求更多纸条
 export const askMorePapers = () => (dispatch, getState) => { 
-  // dispatch(startAsking())
+  dispatch(startAsking())
 
   api.getPapers(false, getState(), msg => {
     
