@@ -1,7 +1,7 @@
 import React from 'react';
 
-const Loading = ({isLoading}) => {
-  if (!isLoading) {
+const Loading = ({showLoading}) => {
+  if (!showLoading) {
     return null;
   }
 

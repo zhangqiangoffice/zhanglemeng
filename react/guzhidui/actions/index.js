@@ -15,9 +15,9 @@ export const CHANGE_KEY3 = 'CHANGE_KEY3'
 export const CHANGE_WORD = 'CHANGE_WORD'
 export const SEARCH_WORD = 'SEARCH_WORD'
 export const SHOW_LOADING = 'SHOW_LOADING'
-export const CLOSE_PAPER_BOX = 'CLOSE_PAPER_BOX'
 export const SUBMIT_SUCCESS = 'SUBMIT_SUCCESS'
 export const START_ASKING = 'START_ASKING'
+export const CLOSE_BOX = 'CLOSE_BOX'
 
 
 //获取纸条列表
@@ -211,8 +211,8 @@ export const changeWord = (word) => ({
   word,
 })
 
-//关闭写纸条框
-export const closePaperBox = () => (({
-  type: CLOSE_PAPER_BOX
-}))
+//关闭登录框或写纸条框
+export const closeBox = () => ({
+  type: CLOSE_BOX
+})
 

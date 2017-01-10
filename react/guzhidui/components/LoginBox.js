@@ -1,12 +1,13 @@
 import React from 'react';
 
-const LoginBox = ({showLoginBox, username, password, changeUsername, changePassword, onSubmit}) => {
+const LoginBox = ({showLoginBox, username, password, changeUsername, changePassword, onSubmit, onClose}) => {
   if (!showLoginBox) {
     return null;
   }
 
   return (
     <div className="login_box">
+      <i className="icon gzdfont gzd-guanbi" onClick={onClose}></i>
       <div>
         <table>
           <tbody>

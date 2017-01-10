@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { login, changeUsername, changePassword } from '../actions'
+import { login, changeUsername, changePassword, closeBox } from '../actions'
 import LoginBox from '../components/LoginBox'
 
 const mapStateToProps = (state) => ({
@@ -18,6 +18,9 @@ const mapDispatchToProps = (dispatch, state) => ({
   changePassword: (event) => {
     dispatch(changePassword((event.target.value).trim()))
   },
+  onClose: () => {
+    dispatch(closeBox())
+  }
 })
   
 const LoginBoxContainer = connect(

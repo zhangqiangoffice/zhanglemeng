@@ -120,10 +120,6 @@
 
 }
 
-.paper_list {
-
-}
-
 .paper {
     border-bottom: @border;
     padding: 10px 0;
@@ -255,4 +251,24 @@
         }
     }
 }
+
+//关闭按钮
+.gzdfont.gzd-guanbi {
+    .circle(27px, #fff, #999);
+    .p-a;
+    top: -10px;
+    right: -10px;
+    font-size: 20px;
+    .pointer;
+
+    &:hover {
+        .circle(40px, #fff, #999);
+        .p-a;
+        top: -15px;
+        right: -15px;
+        font-size: 30px;
+        color: @red;
+    }
+}
+
 

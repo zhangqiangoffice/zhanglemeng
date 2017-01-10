@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import Loading from '../components/Loading'
 
 const mapStateToProps = (state) => ({
-  isLoading: state.isLoading
+  showLoading: state.showLoading
 })
 
 const LoadingContainer = connect(

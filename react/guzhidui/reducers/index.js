@@ -16,7 +16,7 @@ const paperList = (state = [], action) => {
 const page = (state = 0, action) => {
   switch (action.type) {
     case act.RECEIVE_PAPERS:
-      return action.first ? 1 : ++state
+      return action.first ? 1 : (action.papers.length ? ++state : state)
     default:
       return state
   }
@@ -63,6 +63,7 @@ const showLoginBox = (state = false, action) => {
       return true
     case act.LOGIN_SUCCESS:
     case act.SHOW_LOADING:
+    case act.CLOSE_BOX:
       return false
     default:
       return state
@@ -70,7 +71,7 @@ const showLoginBox = (state = false, action) => {
 }
 
 //显隐加载中遮罩层
-const isLoading = (state = true, action) => {
+const showLoading = (state = true, action) => {
   switch (action.type) {
     case act.GO_LOGIN:
     case act.SHOW_PAPER_BOX:
@@ -78,7 +79,7 @@ const isLoading = (state = true, action) => {
       return true
     case act.LOGIN_SUCCESS:
     case act.RECEIVE_PAPERS:
-    case act.CLOSE_PAPER_BOX:
+    case act.CLOSE_BOX:
       return false
     default:
       return state
@@ -124,7 +125,7 @@ const showPaperBox = (state = false, action) => {
   switch (action.type) {
     case act.SHOW_PAPER_BOX:
       return true
-    case act.CLOSE_PAPER_BOX:
+    case act.CLOSE_BOX:
     case act.SHOW_LOADING:
     case act.SUBMIT_SUCCESS:
       return false
@@ -181,16 +182,17 @@ const key3 = (state = '', action) => {
   }
 }
 
-//正在请求纸条
-const isAsking = (state = true, action) => {
+//是否允许请求纸条
+const canAsking = (state = false, action) => {
   switch (action.type) {
-    case act.RECEIVE_PAPERS:
     case act.SUBMIT_SUCCESS:
     case act.LOGIN_SUCCESS:
-      return false
+      return true
     case act.SHOW_LOADING:
     case act.START_ASKING:
-      return true
+      return false
+    case act.RECEIVE_PAPERS:
+      return action.papers.length ? true : false
     default:
       return state
   }
@@ -202,7 +204,7 @@ const rootReducer = combineReducers({
   word,
   keyWord,
   hasLogin,
-  isLoading,
+  showLoading,
   username,
   password,
   name,
@@ -212,7 +214,7 @@ const rootReducer = combineReducers({
   key1,
   key2,
   key3,
-  isAsking,
+  canAsking,
 })
 
 export default rootReducer
