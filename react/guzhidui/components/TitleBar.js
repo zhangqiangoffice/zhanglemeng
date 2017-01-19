@@ -1,6 +1,6 @@
 import React from 'react'
 
-const TitleBar = ({hasLogin, name, word, onGoLogin, onGoWritePaper, onSearch, onChangeWord, onKeyUpEnter, onLogout}) => (
+const TitleBar = ({hasLogin, name, word, onGoLogin, onGoWritePaper, onSearch, onChangeWord, onKeyUpEnter, onLogout, onGoRegister}) => (
   <div className="title_bar">
     <div className="bar_main">
       <span className="title">故纸堆</span>
@@ -14,7 +14,7 @@ const TitleBar = ({hasLogin, name, word, onGoLogin, onGoWritePaper, onSearch, on
               <li onClick={onLogout}><i className="icon gzdfont gzd-tuichu"></i> 退出</li>
             </ul>
           </span>
-        : <button type="button" onClick={onGoLogin}>登录</button>}
+        : <span><button type="button" onClick={onGoLogin}>登录</button><button type="button" onClick={onGoRegister}>注册</button></span>}
       </div>
     </div>
   </div>

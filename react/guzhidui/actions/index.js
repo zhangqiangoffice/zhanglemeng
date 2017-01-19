@@ -19,7 +19,7 @@ export const SUBMIT_SUCCESS = 'SUBMIT_SUCCESS'
 export const START_ASKING = 'START_ASKING'
 export const CLOSE_BOX = 'CLOSE_BOX'
 export const LOGOUT = 'LOGOUT'
-
+export const GO_REGISTER = 'GO_REGISTER'
 
 //获取纸条列表
 const receivePapers = (first, papers, word) => ({
@@ -87,6 +87,11 @@ export const startAsking = () => ({
 //点击登录按钮，打开登录框
 export const goLogin = () => ({
   type: GO_LOGIN,
+})
+
+//点击注册按钮，打开注册框
+export const goRegister = () => ({
+  type: GO_REGISTER,
 })
 
 //显示遮罩层

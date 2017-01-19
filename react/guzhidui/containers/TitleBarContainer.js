@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { goLogin, goWritePaper, changeWord, searchWord, goLogout } from '../actions'
+import { goLogin, goWritePaper, changeWord, searchWord, goLogout, goRegister } from '../actions'
 import TitleBar from '../components/TitleBar'
 
 const mapStateToProps = (state) => ({
@@ -32,6 +32,9 @@ const mapDispatchToProps = (dispatch, state) => ({
     window.localStorage.gzd_username = ''
     dispatch(goLogout())
   },
+  onGoRegister: () => {
+    dispatch(goRegister())
+  }
 })
   
 const TitleBarContainer = connect(

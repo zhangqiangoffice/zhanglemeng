@@ -72,6 +72,19 @@ const showLoginBox = (state = false, action) => {
   }
 }
 
+//是否显示注册登录框
+const showRegisterBox = (state = false, action) => {
+  switch (action.type) {
+    case act.GO_REGISTER:
+      return true
+    case act.SHOW_LOADING:
+    case act.CLOSE_BOX:
+      return false
+    default:
+      return state
+  }
+}
+
 //显隐加载中遮罩层
 const showLoading = (state = true, action) => {
   switch (action.type) {
@@ -211,6 +224,7 @@ const rootReducer = combineReducers({
   password,
   name,
   showLoginBox,
+  showRegisterBox,
   showPaperBox,
   paperContent,
   key1,
