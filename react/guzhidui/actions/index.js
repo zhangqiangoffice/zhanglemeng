@@ -18,6 +18,7 @@ export const SHOW_LOADING = 'SHOW_LOADING'
 export const SUBMIT_SUCCESS = 'SUBMIT_SUCCESS'
 export const START_ASKING = 'START_ASKING'
 export const CLOSE_BOX = 'CLOSE_BOX'
+export const LOGOUT = 'LOGOUT'
 
 
 //获取纸条列表
@@ -215,4 +216,19 @@ export const changeWord = (word) => ({
 export const closeBox = () => ({
   type: CLOSE_BOX
 })
+
+//退出登录
+export const logout = () => ({
+  type: LOGOUT
+})
+
+//通知后台退出登录
+export const goLogout = () => (dispatch, getState) => {
+  dispatch(logout())
+  api.logout(getState(), msg => {
+    if (msg.result !== 1) {
+      alert(msg.message)
+    } 
+  })
+}
 

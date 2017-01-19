@@ -66,6 +66,13 @@ router.post('/login', function(req, res) {
     });
 });
 
+//退出登录
+router.post('/logout', function(req, res) {
+    req.session.user = false;
+    console.log(req.body.username + "退出登录");
+    res.json({result: 1, message: '登出成功'});
+});
+
 //验证登录是否有效
 router.post('/check', function(req, res) {
     if (!req.session.user) {

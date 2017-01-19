@@ -51,6 +51,8 @@ const hasLogin = (state = false, action) => {
     case act.LOGIN_SUCCESS:
     case act.INIT_LOCAL_STORAGE:
       return true
+    case act.LOGOUT:
+      return false
     default:
       return state
   }

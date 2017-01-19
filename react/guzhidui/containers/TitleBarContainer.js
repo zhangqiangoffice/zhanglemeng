@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { goLogin, goWritePaper, changeWord, searchWord } from '../actions'
+import { goLogin, goWritePaper, changeWord, searchWord, goLogout } from '../actions'
 import TitleBar from '../components/TitleBar'
 
 const mapStateToProps = (state) => ({
@@ -25,7 +25,13 @@ const mapDispatchToProps = (dispatch, state) => ({
     if (event.keyCode === 13) {
       dispatch(searchWord())
     }
-  }
+  },
+  onLogout: () => {
+    window.localStorage.gzd_has = ''
+    window.localStorage.gzd_name = ''
+    window.localStorage.gzd_username = ''
+    dispatch(goLogout())
+  },
 })
   
 const TitleBarContainer = connect(

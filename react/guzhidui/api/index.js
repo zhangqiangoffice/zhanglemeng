@@ -24,6 +24,15 @@ export const login = (state, cb) => {
   zAJAX('api/login', datas, cb)
 }
 
+//退出登录接口
+export const logout = (state, cb) => {
+  const datas = {
+    username: state.username,
+  }
+
+  zAJAX('api/logout', datas, cb)
+}
+
 //检查登录是否有效
 export const check = (state, cb) => {
   const datas = {

@@ -66,7 +66,9 @@
         }
 
         .user {
+            width: 100px;
             .f-r;
+            .t-c;
 
             button {
                 .search;
@@ -74,9 +76,38 @@
             }
 
             span {
+                .pointer;
                 color: #fff;
                 line-height: 45px;
+                .block;
+                .size(100%, 100%);
+
+                &:hover {
+                    background-color: #2d2d2d;
+
+                    ul {
+                        .block;
+                    }
+                }
+
+                ul {
+                    .hide;
+                    background-color: #2d2d2d;
+                    color: #fff;
+
+                    li {
+                        .one-height(40px);
+                        border-bottom: @border;
+                        &:hover {
+                            background-color: #111;
+                            color: @main-light;
+                        }
+                    }
+                }
+                
             }
+
+
         }
 
         .write_paper {
