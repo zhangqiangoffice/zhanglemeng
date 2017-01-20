@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { login, changeUsername, changePassword, closeBox } from '../actions'
+import { login, changeUsername, changePassword1, changePassword, checkUsername, closeBox } from '../actions'
 import RegisterBox from '../components/RegisterBox'
 
 const mapStateToProps = (state) => ({
@@ -12,10 +12,16 @@ const mapDispatchToProps = (dispatch, state) => ({
   onSubmit: () => {
     dispatch(login())
   },
-  changeUsername: (event) => {
+  onCheckUsername: () => {
+    dispatch(checkUsername())
+  },
+  onChangeUsername: (event) => {
     dispatch(changeUsername((event.target.value).trim()))
   },
-  changePassword: (event) => {
+  onChangePassword1: (event) => {
+    dispatch(changePassword1((event.target.value).trim()))
+  },
+  onChangePassword: (event) => {
     dispatch(changePassword((event.target.value).trim()))
   },
   onClose: () => {

@@ -8,13 +8,13 @@ const TitleBar = ({hasLogin, name, word, onGoLogin, onGoWritePaper, onSearch, on
       <button type="button" className="write_paper" onClick={onGoWritePaper}>写纸条</button>
       <div className="user">
         {hasLogin ? 
-          <span>
+          <span className="member">
             {name}
             <ul>
               <li onClick={onLogout}><i className="icon gzdfont gzd-tuichu"></i> 退出</li>
             </ul>
           </span>
-        : <span><button type="button" onClick={onGoLogin}>登录</button><button type="button" onClick={onGoRegister}>注册</button></span>}
+        : <span className="btns"><button type="button" onClick={onGoLogin}>登录</button><button type="button" onClick={onGoRegister}>注册</button></span>}
       </div>
     </div>
   </div>

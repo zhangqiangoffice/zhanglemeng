@@ -89,6 +89,7 @@ const showRegisterBox = (state = false, action) => {
 const showLoading = (state = true, action) => {
   switch (action.type) {
     case act.GO_LOGIN:
+    case act.GO_REGISTER:
     case act.SHOW_PAPER_BOX:
     case act.SHOW_LOADING:
       return true
@@ -119,6 +120,18 @@ const password = (state = '', action) => {
       return action.val
     case act.LOGIN_SUCCESS:
       return ''
+    default:
+      return state
+  }
+}
+
+//注册重复密码1
+const password1 = (state = '', action) => {
+  switch (action.type) {
+    case act.CHANGE_PASSWORD1:
+      return action.val
+    // case act.LOGIN_SUCCESS:
+    //   return ''
     default:
       return state
   }
@@ -222,6 +235,7 @@ const rootReducer = combineReducers({
   showLoading,
   username,
   password,
+  password1,
   name,
   showLoginBox,
   showRegisterBox,

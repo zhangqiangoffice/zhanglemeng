@@ -5,6 +5,7 @@ export const END_ASKING = 'END_ASKING'
 export const GO_LOGIN = 'GO_LOGIN'
 export const CHANGE_USERNAME = 'CHANGE_USERNAME'
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD'
+export const CHANGE_PASSWORD1 = 'CHANGE_PASSWORD1'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
 export const INIT_LOCAL_STORAGE = 'INIT_LOCAL_STORAGE'
 export const SHOW_PAPER_BOX = 'SHOW_PAPER_BOX'
@@ -130,6 +131,12 @@ export const changePassword = (val) => ({
   val,
 })
 
+//输入注册密码1
+export const changePassword1 = (val) => ({
+  type: CHANGE_PASSWORD1,
+  val,
+})
+
 //登录成功
 export const loginSuccess = (name) => ({
   type: LOGIN_SUCCESS,
@@ -237,3 +244,11 @@ export const goLogout = () => (dispatch, getState) => {
   })
 }
 
+//检查用户名是否已被注册
+export const checkUsername = () => (dispatch, getState) => {
+  api.checkUsername(getState(), msg => {
+    if (msg.result !== 1) {
+      alert(msg.message)
+    }
+  })
+}

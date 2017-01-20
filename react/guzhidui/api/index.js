@@ -42,6 +42,14 @@ export const check = (state, cb) => {
   zAJAX('api/check', datas, cb)
 }
 
+//检查用户名是否被已注册
+export const checkUsername = (state, cb) => {
+  const datas = {
+    username: state.username,
+  }
+  zAJAX('api/checkUsername', datas, cb)
+}
+
 //提交新纸条
 export const submitPaper = (state, cb) => {
   const datas = {
