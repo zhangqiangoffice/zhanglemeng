@@ -85,6 +85,31 @@ const showRegisterBox = (state = false, action) => {
   }
 }
 
+//是否显示注册提示
+const showRegisterTips = (state = false, action) => {
+  switch (action.type) {
+    case act.SHOW_REGISTER_TIPS:
+    case act.PASSWORD_NOT_SAME:
+      return true
+    case act.CHANGE_USERNAME:
+      return false
+    default:
+      return state
+  }
+}
+
+//注册框提示信息
+const registerTips = (state = '', action) => {
+  switch (action.type) {
+    case act.SHOW_REGISTER_TIPS:
+      return action.message
+    case act.PASSWORD_NOT_SAME:
+      return '两次密码不一致'
+    default:
+      return state
+  }
+}
+
 //显隐加载中遮罩层
 const showLoading = (state = true, action) => {
   switch (action.type) {
@@ -142,6 +167,7 @@ const name = (state = '', action) => {
   switch (action.type) {
     case act.LOGIN_SUCCESS:
     case act.INIT_LOCAL_STORAGE:
+    case act.CHANGE_NAME:
       return action.name
     default:
       return state
@@ -239,6 +265,8 @@ const rootReducer = combineReducers({
   name,
   showLoginBox,
   showRegisterBox,
+  showRegisterTips,
+  registerTips,
   showPaperBox,
   paperContent,
   key1,

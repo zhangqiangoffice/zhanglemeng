@@ -66,6 +66,51 @@ router.post('/login', function(req, res) {
     });
 });
 
+//验证用户名是否已使用
+router.post('/checkUsername', function(req, res) {
+    var user={
+        username: req.body.username,
+    }
+    MongoClient.connect(dburl, function(err, db) {
+        var collection = db.collection('users');
+        collection.find(user).toArray(function(err, docs) {
+            console.log(user.username + "用户名验证");
+            if (docs.length === 0) {
+                res.json({result: 1, message: '用户名可以使用'});
+            } else {
+                res.json({result: 0, message: user.username + " 用户名已存在", });
+            }
+            db.close();
+        })
+    });
+});
+
+//提交密码，验证登录
+router.post('/register', function(req, res) {
+    var user = {
+        username: req.body.username,
+        password: req.body.password,
+        name: req.body.name,
+    }
+    MongoClient.connect(dburl, function(err, db) {
+        var collection = db.collection('users');
+        collection.find({username: user.username}).toArray(function(err, docs) {
+            if (docs.length === 0) {
+                collection.insert(user, function(err, result){
+                    console.log('插入一个新的用户到users');
+                    req.session.user = user;
+                    res.json({result: 1, message: '新用户注册成功', name: user.name, username: user.username});
+                });
+
+                res.json({result: 1, message: '用户名可以使用'});
+            } else {
+                res.json({result: 0, message: user.username + " 用户名已存在", });
+            }
+            db.close();
+        })
+    });
+});
+
 //退出登录
 router.post('/logout', function(req, res) {
     req.session.user = false;

@@ -24,6 +24,16 @@ export const login = (state, cb) => {
   zAJAX('api/login', datas, cb)
 }
 
+//注册接口
+export const register = (state, cb) => {
+  const datas = {
+    username: state.username,
+    password: state.password
+  }
+
+  zAJAX('api/register', datas, cb)
+}
+
 //退出登录接口
 export const logout = (state, cb) => {
   const datas = {

@@ -4,6 +4,7 @@ export const RECEIVE_PAPERS = 'RECEIVE_PAPERS'
 export const END_ASKING = 'END_ASKING'
 export const GO_LOGIN = 'GO_LOGIN'
 export const CHANGE_USERNAME = 'CHANGE_USERNAME'
+export const CHANGE_NAME = 'CHANGE_NAME'
 export const CHANGE_PASSWORD = 'CHANGE_PASSWORD'
 export const CHANGE_PASSWORD1 = 'CHANGE_PASSWORD1'
 export const LOGIN_SUCCESS = 'LOGIN_SUCCESS'
@@ -21,6 +22,9 @@ export const START_ASKING = 'START_ASKING'
 export const CLOSE_BOX = 'CLOSE_BOX'
 export const LOGOUT = 'LOGOUT'
 export const GO_REGISTER = 'GO_REGISTER'
+export const SHOW_REGISTER_TIPS = 'SHOW_REGISTER_TIPS'
+export const PASSWORD_NOT_SAME = 'PASSWORD_NOT_SAME'
+
 
 //获取纸条列表
 const receivePapers = (first, papers, word) => ({
@@ -119,10 +123,36 @@ export const login = () => (dispatch, getState) => {
   })
 }
 
+//进行注册
+export const register = () => (dispatch, getState) => {
+  dispatch(showLoading());
+
+  api.register(getState(), msg => {
+    
+    if (msg.result === 1) {
+      window.localStorage.gzd_has = true
+      window.localStorage.gzd_name = msg.name
+      window.localStorage.gzd_username = msg.username
+
+      dispatch(loginSuccess(msg.name))
+    } else {
+      alert(msg.message)
+      dispatch(showRegisterTips())
+    } 
+  })
+}
+
+
 //输入账号
 export const changeUsername = (username) => ({
   type: CHANGE_USERNAME,
   username,
+})
+
+//输入姓名或昵称
+export const changeName = (name) => ({
+  type: CHANGE_NAME,
+  name,
 })
 
 //输入密码
@@ -244,11 +274,23 @@ export const goLogout = () => (dispatch, getState) => {
   })
 }
 
+//显示注册框信息提示
+export const showRegisterTips = (message) => ({
+  type: SHOW_REGISTER_TIPS,
+  message,
+})
+
 //检查用户名是否已被注册
 export const checkUsername = () => (dispatch, getState) => {
   api.checkUsername(getState(), msg => {
-    if (msg.result !== 1) {
-      alert(msg.message)
+    if (msg.result === 0) {
+      dispatch(showRegisterTips(msg.message))
     }
   })
 }
+
+//显示注册框信息提示
+export const passwordNotSame = () => ({
+  type: PASSWORD_NOT_SAME,
+})
+
