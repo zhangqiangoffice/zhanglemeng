@@ -12,7 +12,7 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch, state) => ({
   onChangePaperContent: (event) => {
-    dispatch(changePaperContent((event.target.value).trim()))
+    dispatch(changePaperContent(event.target.value))
   },
   onSubmitPaper: () => {
     dispatch(submitPaper())

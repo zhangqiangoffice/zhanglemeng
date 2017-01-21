@@ -18,7 +18,7 @@ const LoginBox = ({showRegisterBox, name, username, password1, password, showReg
               </td>
             </tr>
             <tr>
-              <td>新建账号：</td>
+              <td>登录账号：</td>
               <td>
                 <input type="text" placeholder="请输入手机、邮箱" value={username} onChange={onChangeUsername} onBlur={onCheckUsername}></input>
               </td>

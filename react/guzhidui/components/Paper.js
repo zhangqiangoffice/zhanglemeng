@@ -5,7 +5,7 @@ const Paper = ({paper}) => (
   <li className="paper">
     <div className="top"><span className="author_name">{paper.author.name}</span></div>
     <div className="middle">
-      <p>{paper.content}</p>
+      <textarea readOnly="readonly" defaultValue={paper.content} />
     </div>
     <div className="bottom">
       发布于：{dateToString(paper.date)}

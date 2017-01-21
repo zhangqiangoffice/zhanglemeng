@@ -19,7 +19,6 @@ class PaperList extends Component {
       let height = window.innerHeight || document.documentElement.clientHeight || document.body.clientHeight
       let top = getOffset(document.getElementById('anchor'))
       let distance = top - height - 150
-      console.log(that.props.canAsking && scrollTop > distance);
       if (that.props.canAsking && scrollTop > distance) {
         that.props.onCheckMore()
       }
