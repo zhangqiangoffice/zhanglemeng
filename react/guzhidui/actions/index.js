@@ -22,9 +22,7 @@ export const START_ASKING = 'START_ASKING'
 export const CLOSE_BOX = 'CLOSE_BOX'
 export const LOGOUT = 'LOGOUT'
 export const GO_REGISTER = 'GO_REGISTER'
-export const SHOW_REGISTER_TIPS = 'SHOW_REGISTER_TIPS'
-export const PASSWORD_NOT_SAME = 'PASSWORD_NOT_SAME'
-
+export const ALERT_REGISTER_TIPS = 'ALERT_REGISTER_TIPS'
 
 //获取纸条列表
 const receivePapers = (first, papers, word) => ({
@@ -137,7 +135,7 @@ export const register = () => (dispatch, getState) => {
       dispatch(loginSuccess(msg.name))
     } else {
       alert(msg.message)
-      dispatch(showRegisterTips())
+      dispatch(alterRegisterTips())
     } 
   })
 }
@@ -165,6 +163,12 @@ export const changePassword = (val) => ({
 export const changePassword1 = (val) => ({
   type: CHANGE_PASSWORD1,
   val,
+})
+
+//提示注册错误信息
+export const alertRegisterTips = (message) => ({
+  type: ALERT_REGISTER_TIPS,
+  message,
 })
 
 //登录成功
@@ -274,23 +278,12 @@ export const goLogout = () => (dispatch, getState) => {
   })
 }
 
-//显示注册框信息提示
-export const showRegisterTips = (message) => ({
-  type: SHOW_REGISTER_TIPS,
-  message,
-})
-
 //检查用户名是否已被注册
 export const checkUsername = () => (dispatch, getState) => {
   api.checkUsername(getState(), msg => {
     if (msg.result === 0) {
-      dispatch(showRegisterTips(msg.message))
+      dispatch(alertRegisterTips(msg.message))
     }
   })
 }
-
-//显示注册框信息提示
-export const passwordNotSame = () => ({
-  type: PASSWORD_NOT_SAME,
-})
 

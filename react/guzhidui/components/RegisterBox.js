@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LoginBox = ({showRegisterBox, name, username, password1, password, showRegisterTips, registerTips, onChangeName, onChangeUsername, onChangePassword1, onChangePassword, onCheckUsername, onCheckSame, onClose}) => {
+const LoginBox = ({showRegisterBox, name, username, password1, password, showRegisterTips, registerTips, onChangeName, onChangeUsername, onChangePassword1, onChangePassword, onCheckUsername, onCheckData, onClose}) => {
   if (!showRegisterBox) {
     return null;
   }
@@ -33,12 +33,12 @@ const LoginBox = ({showRegisterBox, name, username, password1, password, showReg
             </tr>
             <tr className={showRegisterTips ? 'tips' : 'hide'}>
               <td></td>
-              <td>！ {registerTips}</td>
+              <td>{registerTips}！</td>
             </tr>
             <tr>
               <td></td>
               <td>
-                <button type="button" id="login" onClick={e => onCheckSame(password, password1)}>注册</button>
+                <button type="button" id="login" onClick={e => onCheckData(name, username, password, password1)}>注册</button>
               </td>
             </tr>
           </tbody>

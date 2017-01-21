@@ -5,7 +5,7 @@ var dburl = 'mongodb://zhangq:123456@ds111748.mlab.com:11748/zhanglemeng';
 
 const FAIL = 0;
 const SUCCESS = 1;
-const PAGE_SIZE = 5;
+const PAGE_SIZE = 10;
 
 //返回真
 router.post('/true', function(req, res) {
@@ -88,9 +88,9 @@ router.post('/checkUsername', function(req, res) {
 //提交密码，验证登录
 router.post('/register', function(req, res) {
     var user = {
+        name: req.body.name,
         username: req.body.username,
         password: req.body.password,
-        name: req.body.name,
     }
     MongoClient.connect(dburl, function(err, db) {
         var collection = db.collection('users');
@@ -101,8 +101,6 @@ router.post('/register', function(req, res) {
                     req.session.user = user;
                     res.json({result: 1, message: '新用户注册成功', name: user.name, username: user.username});
                 });
-
-                res.json({result: 1, message: '用户名可以使用'});
             } else {
                 res.json({result: 0, message: user.username + " 用户名已存在", });
             }

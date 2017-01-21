@@ -5,7 +5,6 @@ class PaperList extends Component {
   componentDidMount() {
     let that = this
     window.addEventListener('scroll', function scrollHandler() {
-      console.log('scroll');
       function getOffset(Node, offsetTop) {
         if (!offsetTop) {
             offsetTop = 0;

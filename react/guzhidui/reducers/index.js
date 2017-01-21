@@ -44,7 +44,6 @@ const keyWord = (state = '', action) => {
   }
 }
 
-
 //是否已经登录
 const hasLogin = (state = false, action) => {
   switch (action.type) {
@@ -88,10 +87,13 @@ const showRegisterBox = (state = false, action) => {
 //是否显示注册提示
 const showRegisterTips = (state = false, action) => {
   switch (action.type) {
-    case act.SHOW_REGISTER_TIPS:
-    case act.PASSWORD_NOT_SAME:
+    case act.ALERT_REGISTER_TIPS:
       return true
+    case act.CHANGE_NAME:
     case act.CHANGE_USERNAME:
+    case act.CHANGE_PASSWORD:
+    case act.CHANGE_PASSWORD1:
+    case act.GO_REGISTER:
       return false
     default:
       return state
@@ -101,10 +103,8 @@ const showRegisterTips = (state = false, action) => {
 //注册框提示信息
 const registerTips = (state = '', action) => {
   switch (action.type) {
-    case act.SHOW_REGISTER_TIPS:
+    case act.ALERT_REGISTER_TIPS:
       return action.message
-    case act.PASSWORD_NOT_SAME:
-      return '两次密码不一致'
     default:
       return state
   }
@@ -133,6 +133,9 @@ const username = (state = '', action) => {
     case act.CHANGE_USERNAME:
     case act.INIT_LOCAL_STORAGE:
       return action.username
+    case act.GO_LOGIN:
+    case act.GO_REGISTER:
+      return ''
     default:
       return state
   }
@@ -144,6 +147,8 @@ const password = (state = '', action) => {
     case act.CHANGE_PASSWORD:
       return action.val
     case act.LOGIN_SUCCESS:
+    case act.GO_LOGIN:
+    case act.GO_REGISTER:
       return ''
     default:
       return state
@@ -155,8 +160,8 @@ const password1 = (state = '', action) => {
   switch (action.type) {
     case act.CHANGE_PASSWORD1:
       return action.val
-    // case act.LOGIN_SUCCESS:
-    //   return ''
+    case act.GO_REGISTER:
+      return ''
     default:
       return state
   }

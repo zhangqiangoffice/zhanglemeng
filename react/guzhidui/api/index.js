@@ -27,6 +27,7 @@ export const login = (state, cb) => {
 //注册接口
 export const register = (state, cb) => {
   const datas = {
+    name: state.name,
     username: state.username,
     password: state.password
   }

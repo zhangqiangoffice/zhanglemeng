@@ -9,7 +9,7 @@ const Paper = ({paper}) => (
     </div>
     <div className="bottom">
       发布于：{dateToString(paper.date)}
-      <span className="comments">添加评论</span>
+      <span className="hide comments">添加评论</span>
     </div>  
   </li>
 )
