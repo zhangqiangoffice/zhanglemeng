@@ -32,7 +32,7 @@ class PaperList extends Component {
   render() {
     let listShows = this.props.paperList.map((paper, index) => {
       return (
-        <Paper key={paper._id} paper={paper}/>
+        <Paper key={paper._id} paper={paper} onWritePaper={this.props.onWritePaper}/>
       )
     });
 

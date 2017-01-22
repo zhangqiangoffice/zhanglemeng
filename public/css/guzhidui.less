@@ -164,19 +164,24 @@
         .author_name {
             .bold;
         }
+        .publish_time {
+            color: #999;
+            .f-r;
+        }
     }
     .middle {
-        textarea {
+        p {
             .w100;
-            border: 0;
-            background-color: #fff;
             padding: 10px;
+            line-height: 26px;
         }
     }
     .bottom {
         color: #999;
-        .comments {
-            margin-left: 10px;
+        .clearfix;
+        .write_paper {
+            .f-r;
+            .pointer;
         }
     }
 }
@@ -204,7 +209,7 @@
 .login_box {
     .p-f;
     width: 300px;
-    height: 200px;
+    height: 215px;
     top: 0;
     left: 0;
     right: 0;
@@ -235,6 +240,19 @@
             margin-top: 10px;
             .pointer;
             .radius;
+        }
+    }
+
+    .to_register {
+        color: @main-light;
+        border-bottom: 1px solid @main-light;
+        .f-r;
+        .pointer;
+        margin-top: 5px;
+
+        &:hover {
+            color: @main-color;
+            border-bottom: 1px solid @main-color;
         }
     }
 }
@@ -285,7 +303,7 @@
 //写新纸条的框
 .paper_box {
     .p-f;
-    .size(400px, 360px);
+    .size(700px, 360px);
     top: 0;
     left: 0;
     right: 0;
@@ -296,20 +314,26 @@
     .t-c;
     z-index: 101;
 
+    p {
+        padding: 0;
+        margin: 0 20px 8px;
+        .t-l;
+    }
+
     textarea {
-        .size(360px, 200px);
+        .size(660px, 200px);
         border: @border;
         margin: 20px 0 10px;
         padding: 3px 8px;
     }
 
     button {
+        width: 188px;
         background-color: @main-color;
         border: 1px solid @main-dark;
         color: #fff;
-        width: 90%;
         padding: 5px 0;
-        margin-top: 10px;
+        margin-top: 20px;
         .pointer;
         .radius;
     }

@@ -119,9 +119,10 @@ const showLoading = (state = true, action) => {
     case act.SHOW_LOADING:
       return true
     case act.LOGIN_SUCCESS:
-    case act.RECEIVE_PAPERS:
     case act.CLOSE_BOX:
       return false
+    case act.RECEIVE_PAPERS:
+      return action.first ? false : state 
     default:
       return state
   }

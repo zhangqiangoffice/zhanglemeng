@@ -27,11 +27,11 @@ router.post('/getPapers', function(req, res) {
         var collection = db.collection('papers');
         console.log("查询纸条列表--" + datas.word);
         if (datas.word === '') {
-          collection.find({}).skip((datas.page - 0) * PAGE_SIZE ).limit(PAGE_SIZE).toArray(function(err, docs) {  
+          collection.find({}).skip((datas.page - 0) * PAGE_SIZE ).limit(PAGE_SIZE).sort({date: -1}).toArray(function(err, docs) {  
             res.json({result: SUCCESS, message: '获取纸条列表成功', list: docs, word: datas.word});
           })
         } else {
-          collection.find({"tags": datas.word}).skip((datas.page - 0) * PAGE_SIZE ).limit(PAGE_SIZE).toArray(function(err, docs) {  
+          collection.find({"tags": datas.word}).skip((datas.page - 0) * PAGE_SIZE ).limit(PAGE_SIZE).sort({date: -1}).toArray(function(err, docs) {  
             res.json({result: SUCCESS, message: '获取纸条列表成功', list: docs, word: datas.word});
           })
         }
@@ -132,8 +132,12 @@ router.post('/submitPaper', function(req, res) {
     } else {
         MongoClient.connect(dburl, function(err, db) {
             var collection = db.collection('papers');
+            var reg1 = new RegExp("\r\n","g");
+            var reg2 = new RegExp("\n","g");
+            var str = (req.body.paperContent).replace(reg1,"<br>");
+            str = str.replace(reg2, "<br>")
             var datas = {
-                content: req.body.paperContent,
+                content: str,
                 date: new Date(),
                 author: {
                     _id: req.session.user._id,

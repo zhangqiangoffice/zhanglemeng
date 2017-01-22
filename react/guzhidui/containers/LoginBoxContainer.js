@@ -1,5 +1,5 @@
 import { connect } from 'react-redux'
-import { login, changeUsername, changePassword, closeBox } from '../actions'
+import { login, changeUsername, changePassword, closeBox, goRegister } from '../actions'
 import LoginBox from '../components/LoginBox'
 
 const mapStateToProps = (state) => ({
@@ -20,6 +20,10 @@ const mapDispatchToProps = (dispatch, state) => ({
   },
   onClose: () => {
     dispatch(closeBox())
+  },
+  toRegister: () => {
+    dispatch(closeBox())
+    dispatch(goRegister())
   }
 })
   

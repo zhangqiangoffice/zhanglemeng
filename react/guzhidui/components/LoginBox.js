@@ -1,6 +1,6 @@
 import React from 'react';
 
-const LoginBox = ({showLoginBox, username, password, changeUsername, changePassword, onSubmit, onClose}) => {
+const LoginBox = ({showLoginBox, username, password, changeUsername, changePassword, onSubmit, onClose, toRegister}) => {
   if (!showLoginBox) {
     return null;
   }
@@ -25,6 +25,12 @@ const LoginBox = ({showLoginBox, username, password, changeUsername, changePassw
               <td></td>
               <td>
                 <button type="button" id="login" onClick={onSubmit}>登录</button>
+              </td>
+            </tr>
+            <tr>
+              <td></td>
+              <td>
+                <span className="to_register" onClick={toRegister}>去注册</span>
               </td>
             </tr>
           </tbody>
